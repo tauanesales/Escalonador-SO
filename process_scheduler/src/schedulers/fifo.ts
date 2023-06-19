@@ -1,8 +1,10 @@
 import Process from "../interfaces/Process";
 import Scheduler from "../interfaces/Scheduler";
 
-const fifoScheduler: Scheduler = (processes: Process[]) => {
-  const processesQueue:Process[] = processes.sort((p1, p2) => p1.arrivalTime - p2.arrivalTime);
+export const fifoScheduler: Scheduler = (processes: Process[]) => {
+  const processesQueue: Process[] = processes.sort(
+    (p1, p2) => p1.arrivalTime - p2.arrivalTime
+  );
 
   let schedule: number[] = [];
   let currentProcess: Process;
@@ -19,5 +21,3 @@ const fifoScheduler: Scheduler = (processes: Process[]) => {
 
   return schedule;
 };
-
-export default fifoScheduler;
