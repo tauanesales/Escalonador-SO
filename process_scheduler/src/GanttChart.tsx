@@ -1,46 +1,37 @@
 import { useState } from "react";
 import Process from "./interfaces/Process";
-import { fifoScheduler } from "./schedulers";
+import Scheduler from "./interfaces/Scheduler";
+import {
+  SchedulerType,
+  SchedulerFactory
+} from "./schedulers";
+
+interface GanttChartInput {
+  processes:Process[],
+  schedulerType:SchedulerType
+}
+
+function GanttChart ({processes,schedulerType}:GanttChartInput){
+  const [schedule, setSchedule] = useState<number[]>([]);
+  const scheduler: Scheduler = SchedulerFactory.createScheduler(schedulerType)
 
 
-const GanttChart: React.FC<{ processes: Process[]; scheduler: string }> = ({
-    processes,
-    scheduler,
-  }) => {
-    const [timeline, setTimeline] = useState<number[]>([]);
- 
-    // Execute the selected scheduler
-    const executeScheduler = () => {
-      switch (scheduler) {
-        case "FIFO":
-          fifoScheduler(processes);
-          break;
-        case "SJF":
-          // executeSJF();
-          break;
-        case "Round Robin":
-          // executeRoundRobin();
-          break;
-        case "EDF":
-          // executeEDF();
-          break;
-        default:
-          break;
-      }
-    };
-  
-    return (
-      <div>
-        <button onClick={executeScheduler}>Execute {scheduler} Scheduler</button>
-        <div className="gantt-chart">
-          {timeline.map((processId) => (
-            <div key={processId} className="bar">
-              Process {processId}
-            </div>
-          ))}
-        </div>
+  // Execute the selected scheduler
+  function executeScheduler():void {
+      setSchedule(scheduler.schedule(processes))
+  }
+
+  return (
+    <div>
+      <button onClick={executeScheduler}>Execute {schedulerType} Scheduler</button>
+      <div className="gantt-chart">
+        {schedule}
       </div>
-    );
-  };
+    </div>
+  );
 
-  export default GanttChart
+};
+
+
+
+export default GanttChart;
