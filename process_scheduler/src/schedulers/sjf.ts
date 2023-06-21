@@ -3,19 +3,20 @@ import Scheduler from "../interfaces/Scheduler";
 
 export default class SJFScheduler implements Scheduler {
   public schedule(processes: Process[]): number[] {
+    let _processes:Process[] = [...processes]
     let schedule: number[] = [];
     let currentProcess: Process;
     let counter: number = 0;
-    while (processes.length !== 0) {
-      const arrivedProcesses: number[] = processes
+    while (_processes.length !== 0) {
+      const arrivedProcesses: number[] = _processes
         .map((process, index) => (process.arrivalTime <= counter ? index : -1))
         .filter((index) => index !== -1);
 
       const shortestProcessIndex: number = this.getShortestProcess(
-        processes,
+        _processes,
         arrivedProcesses
       );
-      currentProcess = processes[shortestProcessIndex];
+      currentProcess = _processes[shortestProcessIndex];
 
       while (currentProcess.executionTime !== 0) {
         schedule[counter] = currentProcess.id;
@@ -23,7 +24,7 @@ export default class SJFScheduler implements Scheduler {
         counter++;
       }
 
-      processes.splice(shortestProcessIndex, 1);
+      _processes.splice(shortestProcessIndex, 1);
     }
 
     return schedule;

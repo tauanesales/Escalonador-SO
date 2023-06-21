@@ -3,4 +3,5 @@ export default interface Process {
   arrivalTime: number;
   executionTime: number;
   deadline?: number;
+  numPages: number;
 }

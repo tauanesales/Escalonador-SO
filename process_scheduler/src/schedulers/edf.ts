@@ -5,23 +5,25 @@ export default class EDFScheduler implements Scheduler {
 
   public schedule(processes: Process[], quantum:number=2, overheadTime:number=1): number[] {
 
+    let _processes:Process[] = [...processes]
+
     let schedule: number[] = [];
     let currentProcess: Process;
     let counter: number = 0;
     let processIterations: number = 0;
 
-    while (processes.length !== 0) {
+    while (_processes.length !== 0) {
 
-      const arrivedProcesses: number[] = processes
+      const arrivedProcesses: number[] = _processes
         .map((process, index) => (process.arrivalTime <= counter ? index : -1))
         .filter((index) => index !== -1);
   
       const earliestDeadlineIndex: number = this.getEarliestDeadlineProcess(
-        processes,
+        _processes,
         arrivedProcesses
       );
 
-      currentProcess = processes[earliestDeadlineIndex];
+      currentProcess = _processes[earliestDeadlineIndex];
   
       processIterations = Math.min(currentProcess.executionTime, quantum);
       for (let i = 0; i < processIterations; i++) {
@@ -37,7 +39,7 @@ export default class EDFScheduler implements Scheduler {
           counter++;
         }
       } else {
-        processes.splice(earliestDeadlineIndex, 1);
+        _processes.splice(earliestDeadlineIndex, 1);
       }
     }
   

@@ -44,6 +44,7 @@ export default class RoundRobinScheduler implements Scheduler {
     quantum: number = 2,
     overheadTime: number = 1
   ): number[] {
+    let _processes:Process[] = [...processes]
     let schedule: number[] = [];
     let currentProcess: Process;
     let counter: number = 0;
@@ -53,8 +54,8 @@ export default class RoundRobinScheduler implements Scheduler {
 
     let queue: RotatingQueue = new RotatingQueue();
 
-    while (processes.length !== 0) {
-      const arrivedProcesses = processes
+    while (_processes.length !== 0) {
+      const arrivedProcesses = _processes
         .filter((process) => process.arrivalTime <= counter)
         .map((process) => process.id);
 
@@ -64,8 +65,8 @@ export default class RoundRobinScheduler implements Scheduler {
         queue.rotate();
       }
 
-      processIndex = this.getProcessIndex(queue.get(), processes);
-      currentProcess = processes[processIndex];
+      processIndex = this.getProcessIndex(queue.get(), _processes);
+      currentProcess = _processes[processIndex];
 
       // quantum time execution
       processIterations = Math.min(currentProcess.executionTime, quantum);
@@ -84,7 +85,7 @@ export default class RoundRobinScheduler implements Scheduler {
 
         lastProcessEnded = false;
       } else {
-        processes.splice(processIndex, 1);
+        _processes.splice(processIndex, 1);
         queue.remove(currentProcess.id);
         lastProcessEnded = true;
       }
