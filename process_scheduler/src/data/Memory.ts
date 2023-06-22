@@ -1,4 +1,6 @@
-export default class GeneralStorage {
+import MemoryInteface from "../interfaces/IMemory";
+
+export default class Memory implements MemoryInteface{
   private _storage: number[];
   private storageSize: number;
 
