@@ -16,22 +16,16 @@ export default class GeneralStorage {
   }
 
   public store(processId: number, numPages: number): void {
+    let storedCount = 0
     const storageLeft: number = this.storageLeft;
-    const nanIndexes: number[] = this._storage.reduce(
-      (indexes: number[], value: number, index: number) => {
-        if (isNaN(value)) {
-          indexes.push(index);
-        }
-        return indexes;
-      },
-      []
-    );
-
     if (numPages <= storageLeft) {
-      let counter: number = 0;
-      while (counter < numPages) {
-        this._storage[nanIndexes[counter]] = processId;
-        counter++;
+      for (let i = 0; i <this.storageSize; i++) {
+        if (isNaN(this._storage[i])){
+          this._storage[i] = processId;
+          storedCount++;
+        }
+
+        if(storedCount === numPages) break
       }
     } else {
       console.log("not enough space in Disk, storageLeft:" + storageLeft);
