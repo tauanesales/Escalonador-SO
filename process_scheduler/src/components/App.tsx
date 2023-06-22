@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Process from "./interfaces/Process";
-import { SchedulerType } from "./schedulers";
+import Process from "../interfaces/Process";
+import { SchedulerType } from "../schedulers";
 import GanttChart from "./GanttChart"
 
 // Define the App component
