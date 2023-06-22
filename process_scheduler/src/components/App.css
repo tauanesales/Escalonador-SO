@@ -1,0 +1,184 @@
+
+body, h1 {
+  margin: 0;
+}
+.App {
+  background: #14114e;
+  width: 100vw;
+  height: 100vh;
+}
+.logo {
+  width: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  position: absolute;
+  top: 5%;
+  left: 50%;
+}
+.button {
+  background-color: #87CEFA;
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid #87CEFA; 
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color:#333333;
+}
+.quantum {
+  background-color: #87CEFA;
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid #87CEFA; 
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  margin: 50 auto;
+  position: absolute;
+  color:#333333;
+  top: 300px;
+  left: 60%;
+}
+.quantum2 {
+  background-color: #87CEFA;
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid #87CEFA; 
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  margin: 50 auto;
+  position: absolute;
+  color:#333333;
+  top: 284px;
+  left: 50%;
+}
+.sobrecarga {
+  background-color: #87CEFA;
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid #87CEFA; 
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  margin: 50 auto;
+  position: absolute;
+  color:#333333;
+  top: 355px;
+  left: 60%;
+}
+.sobrecarga2 {
+  background-color: #87CEFA;
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid #87CEFA; 
+  border-radius: 2px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  margin: 50 auto;
+  position: absolute;
+  color:#333333;
+  top: 340px;
+  left: 50%;
+}
+.button1 {
+  background-color: #87CEFA;
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid #87CEFA; 
+  border-radius: 4px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  margin: 50 auto;
+  position: absolute;
+  top: 200px;
+  left: 3%;
+  color:#333333;
+}
+.button2 {
+  background-color: #87CEFA;
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid #87CEFA; 
+  border-radius: 4px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  margin: 50 auto;
+  position: absolute;
+  top: 200px;
+  left: 23%;
+  color:#333333;
+}
+.button3 {
+  background-color: #87CEFA;
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid #87CEFA; 
+  border-radius: 4px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-content: left;
+  align-items: center;
+  margin: 50 auto;
+  position: absolute;
+  top: 300px;
+  left: 3%;
+  color:#333333;
+}
+
+.button4 {
+  background-color: #87CEFA;
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid #87CEFA; 
+  border-radius: 4px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-content: left;
+  align-items: center;
+  margin: 50 auto;
+  position: absolute;
+  top: 300px;
+  left: 23%;
+  color:#333333;
+}
+.buttonVerde {
+  background-color: #2E8B57; 
+  color: white; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 4px; 
+  font-size: 20px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-content: left;
+  align-items: center;
+  margin: 50 auto;
+  position: absolute;
+  top: 400px;
+  left: 12%;
+  color:#333333;
+}

@@ -7,11 +7,12 @@ import {
 } from "../schedulers";
 
 interface GanttChartInput {
+  classNameParam:string,
   processes:Process[],
   schedulerType:SchedulerType
 }
 
-function GanttChart ({processes,schedulerType}:GanttChartInput){
+function GanttChart ({classNameParam, processes,schedulerType}:GanttChartInput){
   const [schedule, setSchedule] = useState<number[]>([]);
   const scheduler: Scheduler = SchedulerFactory.createScheduler(schedulerType)
 
@@ -23,7 +24,7 @@ function GanttChart ({processes,schedulerType}:GanttChartInput){
 
   return (
     <div>
-      <button onClick={executeScheduler}>Execute {schedulerType} Scheduler</button>
+      <button className={classNameParam} onClick={executeScheduler}>Execute {schedulerType} Scheduler</button>
       <div className="gantt-chart">
         {schedule}
       </div>
