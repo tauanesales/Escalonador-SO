@@ -113,14 +113,14 @@ let processes: Process[] = [
 
 import { SchedulerFactory, SchedulerType } from "../schedulers";
 import PagingAlgorithm from "../interfaces/PagingAlgorithm";
-const scheduler = SchedulerFactory.createScheduler(SchedulerType.FIFO)
+const scheduler = SchedulerFactory.createScheduler(SchedulerType.EDF)
 const shedule = scheduler.schedule(processes)
 
 
 // Example usage:
 const ramSize: number = 20; 
 const pageSize: number = 4;
-const diskSize: number = 2000; 
+const diskSize: number = 80; 
 
 const fifo = new FIFOPageReplacement(processes,ramSize,pageSize,diskSize)
 console.log(fifo.run(shedule)) 

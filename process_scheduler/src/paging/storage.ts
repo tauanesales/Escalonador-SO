@@ -4,11 +4,11 @@ export default class GeneralStorage {
 
   constructor(storageSize: number, pageSize: number) {
     this.storageSize = storageSize / pageSize;
-    this._storage = [];
+    this._storage = new Array(this.storageSize).fill(NaN);
   }
 
   get storageLeft(): number {
-    return this.storageSize - this._storage.length;
+    return this._storage.filter((value) => isNaN(value)).length;
   }
 
   get storage(): number[] {
@@ -16,33 +16,37 @@ export default class GeneralStorage {
   }
 
   public store(processId: number, numPages: number): void {
-    let newSize = numPages + this._storage.length;
-    if (newSize <= this.storageSize) {
-      for (let i = this._storage.length; i < newSize; i++) {
-        this._storage[i] = processId;
+    const storageLeft: number = this.storageLeft;
+    const nanIndexes: number[] = this._storage.reduce(
+      (indexes: number[], value: number, index: number) => {
+        if (isNaN(value)) {
+          indexes.push(index);
+        }
+        return indexes;
+      },
+      []
+    );
+
+    if (numPages <= storageLeft) {
+      let counter: number = 0;
+      while (counter < numPages) {
+        this._storage[nanIndexes[counter]] = processId;
+        counter++;
       }
-    }else{
-      console.log("not enough space in Disk, storageLeft:" + this.storageLeft)
+    } else {
+      console.log("not enough space in Disk, storageLeft:" + storageLeft);
     }
   }
 
   public release(processId: number, numPages: number): void {
-    let newSize: number = this._storage.length - numPages;
-    if (newSize >= 0) {
-      let result: number[] = [];
-      let removedCount: number = 0;
-      let len: number = this.storage.length;
-      let currItem: number;
-      for (let i = 0; i < len; i++) {
-        currItem = this._storage[i];
-        if (currItem !== processId || removedCount == numPages) {
-          result.push(currItem);
-        } else {
-          removedCount++;
-        }
+    let removedCount:number = 0;
+    for (let i = 0; i <this.storageSize; i++) {
+      if (this._storage[i] === processId){
+        this._storage[i] = NaN;
+        removedCount++
       }
 
-      this._storage = result;
+      if(removedCount == numPages) break
     }
   }
 }
