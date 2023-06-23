@@ -24,7 +24,7 @@ function GanttChart ({classNameParam, processes,schedulerType}:GanttChartInput){
 
   return (
     <div>
-      <button className={classNameParam} onClick={executeScheduler}>Execute {schedulerType} Scheduler</button>
+      <button className={classNameParam} onClick={executeScheduler}>{schedulerType}</button>
       <div className="gantt-chart">
         {schedule}
       </div>
