@@ -60,7 +60,7 @@ const InputsAndMethods: React.FC = () => {
         </div>
 
         <div className="column box yellow">
-          <div className="row">
+          <div className="row between">
             <p className="box">Quantum {quantum}</p>
             <input
               className="box"
