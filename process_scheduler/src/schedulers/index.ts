@@ -7,7 +7,7 @@ import RoundRobinScheduler from "./roundRobin";
 export enum SchedulerType {
   FIFO = 'FIFO',
   SJF = 'SJF',
-  RoundRobin = 'RoundRobin',
+  RoundRobin = 'RR',
   EDF = 'EDF',
 }
 

@@ -1,0 +1,12 @@
+.App {
+  background: #14114e;
+  display: flex;
+  max-width: 99vw;
+  height: 100vh;
+  padding: 5%;
+}
+
+.logo {
+  width: 90px;
+  margin: 0 auto;
+}
