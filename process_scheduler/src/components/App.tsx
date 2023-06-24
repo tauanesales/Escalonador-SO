@@ -6,8 +6,6 @@ import "./App.css";
 
 // Define the App component
 const App: React.FC = () => {
-  
-
   return (
     <div className="App column">
       <img src={logo} alt="Logo" className="logo" />

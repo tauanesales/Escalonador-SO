@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import "./App.css";
+import { SchedulerType } from "../schedulers";
+import Process from "../interfaces/Process";
 import GanttChart from "./GanttChart";
 
-import Process from "../interfaces/Process";
-import { SchedulerType } from "../schedulers";
-
-// Define the InputsAndMethods component
 const InputsAndMethods: React.FC = () => {
   const processes: Process[] = [
     { id: 1, arrivalTime: 0, executionTime: 5, deadline: 20, numPages: 2 },
