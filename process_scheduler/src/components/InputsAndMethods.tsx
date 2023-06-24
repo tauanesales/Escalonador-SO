@@ -25,8 +25,8 @@ const InputsAndMethods: React.FC = () => {
 
   return (
     <div>
-      <div className="row align-items-start">
-        <div className="column flex-grow yellow box mw-300">
+      <div className="row wrap align-items-start">
+        <div className="column flex-grow yellow box mw-200">
           <div className="box">Seleção de Métodos</div>
 
           <div className="row evenly">

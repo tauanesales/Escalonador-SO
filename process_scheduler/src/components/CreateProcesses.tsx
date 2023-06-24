@@ -23,14 +23,20 @@ const CreateProcesses: React.FC = () => {
 
   return (
     <div>
-      <div className="box button green" onClick={addProcess}>
+      <button
+        className="box align-items-center center button green"
+        onClick={addProcess}
+      >
         Criar Processo
-      </div>
+      </button>
       <div id="process-box column" className="large-box row">
         {customElements.map((element: any, index: any) => (
           <div key={index}>
-            <button className="close-btn" onClick={() => deleteProcess(index)}>
-              X
+            <button
+              className="close-btn small-text center align-items-center pm-0"
+              onClick={() => deleteProcess(index)}
+            >
+              ✖
             </button>
             {element}
           </div>

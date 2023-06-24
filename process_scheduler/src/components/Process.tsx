@@ -26,45 +26,53 @@ const Process: any = (props: any) => {
   };
 
   return (
-    <div className="box yellow between column mh-100">
+    <div className="box yellow between column">
       <input
         className="box"
         type="text"
         value={processName}
         onChange={handleSetProcessName}
       />
-      <div className="row between align-items-center">
-        Tempo:
-        <input
-          className="mw-50"
-          type="text"
-          value={time}
-          onChange={handleSetTime}
-        ></input>
-        Deadline:
-        <input
-          className="mw-50"
-          type="text"
-          value={deadline}
-          onChange={handleSetDeadline}
-        />
+      <div className="row between align-items-center wrap">
+        <div className="row flex-grow between p-5">
+          <div>Tempo:</div>
+          <input
+            className="mw-50"
+            type="text"
+            value={time}
+            onChange={handleSetTime}
+          ></input>
+        </div>
+        <div className="row flex-grow between p-5">
+          <div>Deadline:</div>
+          <input
+            className="mw-50"
+            type="text"
+            value={deadline}
+            onChange={handleSetDeadline}
+          />
+        </div>
       </div>
 
-      <div className="row between align-items-center">
-        Prioridade:
-        <input
-          className="mw-50"
-          type="text"
-          value={priority}
-          onChange={handleSetPriority}
-        />
-        Chegada:
-        <input
-          className="mw-50"
-          type="text"
-          value={arrival}
-          onChange={handleSetArrival}
-        />
+      <div className="row between align-items-center wrap">
+        <div className="row flex-grow between p-5">
+          <div> Prioridade:</div>
+          <input
+            className="mw-50"
+            type="text"
+            value={priority}
+            onChange={handleSetPriority}
+          />
+        </div>
+        <div className="row flex-grow between p-5">
+          <div> Chegada:</div>
+          <input
+            className="mw-50"
+            type="text"
+            value={arrival}
+            onChange={handleSetArrival}
+          />
+        </div>
       </div>
     </div>
   );
