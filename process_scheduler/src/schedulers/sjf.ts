@@ -3,7 +3,7 @@ import Scheduler from "../interfaces/Scheduler";
 
 export default class SJFScheduler implements Scheduler {
   public schedule(processes: Process[]): number[] {
-    let _processes:Process[] = [...processes]
+    let _processes: Process[] = [...processes];
     let schedule: number[] = [];
     let currentProcess: Process;
     let counter: number = 0;

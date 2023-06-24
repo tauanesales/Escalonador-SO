@@ -3,13 +3,12 @@ import Scheduler from "../interfaces/Scheduler";
 import RotatingQueue from "../data/RotatingQueue";
 
 export default class RoundRobinScheduler implements Scheduler {
-
   public schedule(
     processes: Process[],
     quantum: number = 2,
     overheadTime: number = 1
   ): number[] {
-    let _processes:Process[] = [...processes]
+    let _processes: Process[] = [...processes];
     let schedule: number[] = [];
     let currentProcess: Process;
     let counter: number = 0;
