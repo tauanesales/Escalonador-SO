@@ -15,9 +15,10 @@
   line-height: 1;
   background-color: #ff5555;
   cursor: pointer;
-  &:hover {
-    background-color: red;
-  }
+}
+
+.close-btn:hover {
+  background-color: red;
 }
 
 .block {
