@@ -54,7 +54,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 nvm install --lts
 ```
 
-Obs.: Pode ser necessário reiniciar o terminal/computador entre após o segundo e/ou terceiro comando.
+Obs.: Pode ser necessário reiniciar o terminal/computador entre/após o segundo e/ou terceiro comando.
 
 Fontes:
 
