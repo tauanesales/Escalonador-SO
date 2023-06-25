@@ -56,7 +56,7 @@ const Process: any = (props: any) => {
 
       <div className="row between align-items-center wrap">
         <div className="row flex-grow between p-5">
-          <div> Prioridade:</div>
+          <div> Páginas:</div>
           <input
             className="mw-50"
             type="text"

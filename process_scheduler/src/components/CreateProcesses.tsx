@@ -12,7 +12,6 @@ const CreateProcesses: React.FC = () => {
     );
     setCustomElements(updatedElements);
   };
-
   const addProcess = () => {
     // Logic to add a new custom element
     const newElement: any = (
@@ -29,19 +28,21 @@ const CreateProcesses: React.FC = () => {
       >
         Criar Processo
       </button>
-      <div id="process-box column" className="large-box row">
-        {customElements.map((element: any, index: any) => (
-          <div key={index}>
-            <button
-              className="close-btn small-text center align-items-center pm-0"
-              onClick={() => deleteProcess(index)}
-            >
-              ✖
-            </button>
-            {element}
-          </div>
-        ))}
-      </div>
+      {customElements.length > 0 ? (
+        <div id="process-box column" className="large-box row">
+          {customElements.map((element: any, index: any) => (
+            <div key={index}>
+              <button
+                className="close-btn small-text center align-items-center pm-0"
+                onClick={() => deleteProcess(index)}
+              >
+                ✖
+              </button>
+              {element}
+            </div>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };
