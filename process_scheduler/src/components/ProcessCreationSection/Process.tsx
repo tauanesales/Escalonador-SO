@@ -4,10 +4,10 @@ import "./Process.css";
 const Process: any = (props: any) => {
   const [processName, setProcessName] = useState("Processo " + props.index);
 
-  const [time, setTime] = useState(0);
+  const [executionTime, setTime] = useState(0);
   const [deadline, setDeadline] = useState(0);
-  const [priority, setPriority] = useState(0);
-  const [arrival, setArrival] = useState(0);
+  const [numPages, setPriority] = useState(0);
+  const [arrivalTime, setArrival] = useState(0);
 
   const handleSetProcessName = (e: any) => {
     setProcessName(e.target.value);
@@ -18,7 +18,7 @@ const Process: any = (props: any) => {
   const handleSetDeadline = (e: any) => {
     setDeadline(e.target.value);
   };
-  const handleSetPriority = (e: any) => {
+  const handleSetNumPages = (e: any) => {
     setPriority(e.target.value);
   };
   const handleSetArrival = (e: any) => {
@@ -39,7 +39,7 @@ const Process: any = (props: any) => {
           <input
             className="mw-50"
             type="text"
-            value={time}
+            value={executionTime}
             onChange={handleSetTime}
           ></input>
         </div>
@@ -60,8 +60,8 @@ const Process: any = (props: any) => {
           <input
             className="mw-50"
             type="text"
-            value={priority}
-            onChange={handleSetPriority}
+            value={numPages}
+            onChange={handleSetNumPages}
           />
         </div>
         <div className="row flex-grow between p-5">
@@ -69,7 +69,7 @@ const Process: any = (props: any) => {
           <input
             className="mw-50"
             type="text"
-            value={arrival}
+            value={arrivalTime}
             onChange={handleSetArrival}
           />
         </div>
