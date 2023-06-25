@@ -1,13 +1,10 @@
+import ProcessRow from "./ProcessRow";
 import "./FrontGanttChart.css";
 
 const FrontGanttChart: any = () => {
   return (
     <div className="box chart">
-      <div className="row">
-        <div className="chart-box wait-box"></div>
-        <div className="chart-box wait-box"></div>
-        <div className="chart-box wait-box"></div>
-      </div>
+      <ProcessRow processName="P1" />
     </div>
   );
 };

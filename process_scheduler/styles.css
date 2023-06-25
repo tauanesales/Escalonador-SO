@@ -1,3 +1,11 @@
+/* Root global variables */
+:root {
+  --chart-background-color: azure;
+  --wait-box: yellow;
+  --processing-box: #00ff00;
+  --switch-box: #ff0000;
+}
+
 /* Flex stuff */
 .row {
   display: flex;
@@ -97,7 +105,7 @@
   margin: 2px;
 }
 
-.pm-0{
+.pm-0 {
   padding: 0px;
   margin: 0px;
 }
