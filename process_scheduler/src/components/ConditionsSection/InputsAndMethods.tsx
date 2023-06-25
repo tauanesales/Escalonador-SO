@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { SchedulerType } from "../schedulers";
-import Process from "../interfaces/Process";
-import GanttChart from "./GanttChart";
+import { SchedulerType } from "../../schedulers";
+import Process from "../../interfaces/Process";
+import GanttChart from "../GanttChart";
 
 const InputsAndMethods: React.FC = () => {
   const processes: Process[] = [

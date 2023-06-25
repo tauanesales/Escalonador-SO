@@ -1,0 +1,36 @@
+:root{
+  --background-color: azure;
+  --wait-box: yellow;
+  --processing-box: #00ff00;
+  --switch-box: #ff0000;
+} 
+
+.chart {
+  height: 300px;
+  background-color: var(--background-color);
+}
+
+.chart-box {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.wait-box {
+  background-color: var(--wait-box);
+}
+
+.processing-box {
+  background-color: var(--processing-box);
+}
+
+.switch-box {
+  background-color: var(--switch-box);
+}
+
+.hidden-box {
+  background-color: var(--background-color);
+}

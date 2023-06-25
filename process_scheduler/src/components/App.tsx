@@ -1,8 +1,8 @@
 import React from "react";
 import logo from "../assets/img/logo.png";
-import InputsAndMethods from "./InputsAndMethods";
-import CreateProcesses from "./CreateProcesses";
-import FrontGanttChart from "./FrontGanttChart";
+import InputsAndMethods from "./ConditionsSection/InputsAndMethods";
+import CreateProcesses from "./ProcessCreationSection/CreateProcesses";
+import FrontGanttChart from "./ChartSection/FrontGanttChart";
 import "./App.css";
 
 // Define the App component
