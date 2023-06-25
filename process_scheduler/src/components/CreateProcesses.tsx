@@ -4,6 +4,7 @@ import Process from "./Process";
 
 const CreateProcesses: React.FC = () => {
   const [customElements, setCustomElements]: any = useState([]);
+  const [elementCounter, setCounter]: any = useState(1);
 
   const deleteProcess = (index: Number) => {
     // Logic to delete the custom element
@@ -11,13 +12,17 @@ const CreateProcesses: React.FC = () => {
       (_: any, i: any) => i !== index
     );
     setCustomElements(updatedElements);
+    if (updatedElements.length == 0) {
+      setCounter(1);
+    }
   };
   const addProcess = () => {
     // Logic to add a new custom element
     const newElement: any = (
-      <Process key={customElements.length} index={customElements.length + 1} />
+      <Process key={customElements.length} index={elementCounter} />
     );
     setCustomElements([...customElements, newElement]);
+    setCounter(elementCounter + 1);
   };
 
   return (
