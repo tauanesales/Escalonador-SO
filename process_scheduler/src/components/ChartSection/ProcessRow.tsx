@@ -1,6 +1,6 @@
 import ChartBox from "./ChartBox";
 
-const ProcessRow: any = (props) => {
+const ProcessRow: any = (props: any) => {
   return (
     <div className="row align-items-center">
       {props.processName}:

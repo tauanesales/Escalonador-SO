@@ -15,6 +15,7 @@ function GanttChart({
   schedulerType,
 }: GanttChartInput) {
   const [schedule, setSchedule] = useState<number[]>([]);
+  console.log(schedule);
   const scheduler: Scheduler = SchedulerFactory.createScheduler(schedulerType);
 
   // Execute the selected scheduler
@@ -27,7 +28,6 @@ function GanttChart({
       <button className={classNameParam} onClick={executeScheduler}>
         {schedulerType}
       </button>
-      <div className="gantt-chart">{schedule}</div>
     </div>
   );
 }
