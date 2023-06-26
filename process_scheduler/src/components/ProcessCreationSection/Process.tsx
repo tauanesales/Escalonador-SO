@@ -1,29 +1,40 @@
-import { useState } from "react";
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import "./Process.css";
 
-const Process: any = (props: any) => {
-  const [processName, setProcessName] = useState("Processo " + props.index);
+interface ProcessProps {
+  index: number;
+  onDataChange: (index: number, data: ProcessData) => void;
+}
 
-  const [executionTime, setTime] = useState(0);
-  const [deadline, setDeadline] = useState(0);
-  const [numPages, setPriority] = useState(0);
-  const [arrivalTime, setArrival] = useState(0);
+interface ProcessData {
+  processName: string;
+  executionTime: number;
+  deadline: number;
+  numPages: number;
+  arrivalTime: number;
+}
 
-  const handleSetProcessName = (e: any) => {
-    setProcessName(e.target.value);
-  };
-  const handleSetTime = (e: any) => {
-    setTime(e.target.value);
-  };
-  const handleSetDeadline = (e: any) => {
-    setDeadline(e.target.value);
-  };
-  const handleSetNumPages = (e: any) => {
-    setPriority(e.target.value);
-  };
-  const handleSetArrival = (e: any) => {
-    setArrival(e.target.value);
+const Process: React.FC<ProcessProps> = (props) => {
+  const { index, onDataChange } = props;
+  const [processData, setProcessData] = useState<ProcessData>({
+    processName: "",
+    executionTime: 0,
+    deadline: 0,
+    numPages: 0,
+    arrivalTime: 0,
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setProcessData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    console.log(processData);
+    onDataChange(index, {
+      ...processData, // Pass the updated data from the state
+      [name]: value, // Update the specific field with the new value
+    });
   };
 
   return (
@@ -31,47 +42,52 @@ const Process: any = (props: any) => {
       <input
         className="box"
         type="text"
-        value={processName}
-        onChange={handleSetProcessName}
+        name="processName"
+        value={processData.processName}
+        onChange={handleInputChange}
       />
       <div className="row between align-items-center wrap">
         <div className="row flex-grow between p-5">
           <div>Tempo:</div>
           <input
             className="mw-50"
-            type="text"
-            value={executionTime}
-            onChange={handleSetTime}
-          ></input>
+            type="number"
+            name="executionTime"
+            value={processData.executionTime}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="row flex-grow between p-5">
           <div>Deadline:</div>
           <input
             className="mw-50"
-            type="text"
-            value={deadline}
-            onChange={handleSetDeadline}
+            type="number"
+            name="deadline"
+            value={processData.deadline}
+            onChange={handleInputChange}
           />
         </div>
       </div>
 
       <div className="row between align-items-center wrap">
         <div className="row flex-grow between p-5">
-          <div> Páginas:</div>
+          <div>Páginas:</div>
           <input
             className="mw-50"
-            type="text"
-            value={numPages}
-            onChange={handleSetNumPages}
+            type="number"
+            name="numPages"
+            value={processData.numPages}
+            onChange={handleInputChange}
           />
         </div>
         <div className="row flex-grow between p-5">
-          <div> Chegada:</div>
+          <div>Chegada:</div>
           <input
             className="mw-50"
-            type="text"
-            value={arrivalTime}
-            onChange={handleSetArrival}
+            type="number"
+            name="arrivalTime"
+            value={processData.arrivalTime}
+            onChange={handleInputChange}
           />
         </div>
       </div>
