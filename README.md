@@ -73,3 +73,36 @@ Esse sistema deve implementar os algoritmos de substituição de páginas:
 - Colocar delay para verificar a execução
 
 - A linguagem de programação é de escolha do grupo.
+
+## Como executar
+
+### Instale o node&npm:
+
+#### Linux
+
+```bash
+sudo apt-get install curl
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+nvm install --lts
+```
+
+Obs.: Pode ser necessário reiniciar o terminal/computador entre/após o segundo e/ou terceiro comando.
+
+Fontes:
+
+- https://github.com/nvm-sh/nvm#install--update-script
+- https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl
+
+### Baixar repositório e rodar o projeto:
+
+Com git e node/npm instalados:
+
+```bash
+git clone https://github.com/tauanesales/Escalonador-SO.git
+cd Escalonador-SO
+git fetch --all
+git checkout front
+cd process_scheduler
+npm install
+npm run dev
+```

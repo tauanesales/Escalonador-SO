@@ -1,0 +1,4 @@
+.chart {
+  height: 300px;
+  background-color: var(--chart-background-color);
+}

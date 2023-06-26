@@ -5,10 +5,10 @@ import SJFScheduler from "./sjf";
 import RoundRobinScheduler from "./roundRobin";
 
 export enum SchedulerType {
-  FIFO = 'FIFO',
-  SJF = 'SJF',
-  RoundRobin = 'RR',
-  EDF = 'EDF',
+  FIFO = "FIFO",
+  SJF = "SJF",
+  RoundRobin = "RR",
+  EDF = "EDF",
 }
 
 export class SchedulerFactory {
@@ -23,8 +23,7 @@ export class SchedulerFactory {
       case SchedulerType.EDF:
         return new EDFScheduler();
       default:
-        throw new Error('Invalid scheduler type');
+        throw new Error("Invalid scheduler type");
     }
   }
 }
-

@@ -1,0 +1,37 @@
+name: Auto-deploy React App
+
+on:
+  push:
+    branches: ["main", "front"]
+    paths:
+      - "process_scheduler/**"
+      - ".github/workflows/autodeploy.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 19.x
+          cache: "npm"
+          cache-dependency-path: ./process_scheduler/package-lock.json
+
+      - name: Install pkgs.
+        run: |
+          cd ./process_scheduler/;
+          npm ci;
+
+      - name: Deploy app to GH pages.
+        run: |
+          git config --global user.name $user_name
+          git config --global user.email $user_email
+          git config remote.origin.url 'https://${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}@github.com/${{ github.repository }}.git'
+          cd ./process_scheduler/;
+
+          npm run deploy
+        env:
+          user_name: "Tauane Sales"
+          user_email: "taysales6@gmail.com"

@@ -1,6 +1,6 @@
 import MemoryInteface from "../interfaces/IMemory";
 
-export default class Memory implements MemoryInteface{
+export default class Memory implements MemoryInteface {
   private _storage: number[];
   private storageSize: number;
 
@@ -18,16 +18,16 @@ export default class Memory implements MemoryInteface{
   }
 
   public store(processId: number, numPages: number): void {
-    let storedCount = 0
+    let storedCount = 0;
     const storageLeft: number = this.storageLeft;
     if (numPages <= storageLeft) {
-      for (let i = 0; i <this.storageSize; i++) {
-        if (isNaN(this._storage[i])){
+      for (let i = 0; i < this.storageSize; i++) {
+        if (isNaN(this._storage[i])) {
           this._storage[i] = processId;
           storedCount++;
         }
 
-        if(storedCount === numPages) break
+        if (storedCount === numPages) break;
       }
     } else {
       console.log("not enough space in Disk, storageLeft:" + storageLeft);
@@ -35,14 +35,14 @@ export default class Memory implements MemoryInteface{
   }
 
   public release(processId: number, numPages: number): void {
-    let removedCount:number = 0;
-    for (let i = 0; i <this.storageSize; i++) {
-      if (this._storage[i] === processId){
+    let removedCount: number = 0;
+    for (let i = 0; i < this.storageSize; i++) {
+      if (this._storage[i] === processId) {
         this._storage[i] = NaN;
-        removedCount++
+        removedCount++;
       }
 
-      if(removedCount == numPages) break
+      if (removedCount == numPages) break;
     }
   }
 }

@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import "./App.css";
-import GanttChart from "./GanttChart";
+import { SchedulerType } from "../../schedulers";
+import Process from "../../interfaces/Process";
+import GanttChart from "../GanttChart";
 
-import Process from "../interfaces/Process";
-import { SchedulerType } from "../schedulers";
-
-// Define the InputsAndMethods component
 const InputsAndMethods: React.FC = () => {
   const processes: Process[] = [
     { id: 1, arrivalTime: 0, executionTime: 5, deadline: 20, numPages: 2 },
@@ -15,9 +12,9 @@ const InputsAndMethods: React.FC = () => {
     { id: 5, arrivalTime: 8, executionTime: 4, deadline: 5, numPages: 2 },
   ];
 
-  const [quantum, setQuantumValue] = useState("");
+  const [quantum, setQuantumValue] = useState(4);
 
-  const [sobrecarga, setSobrecargaValue] = useState("");
+  const [sobrecarga, setSobrecargaValue] = useState(1);
 
   const handleQuantumChange = (e: any) => {
     setQuantumValue(e.target.value);
@@ -28,8 +25,8 @@ const InputsAndMethods: React.FC = () => {
 
   return (
     <div>
-      <div className="row align-items-start">
-        <div className="column flex-grow yellow box mw-300">
+      <div className="row wrap align-items-start">
+        <div className="column flex-grow yellow box mw-200">
           <div className="box">Seleção de Métodos</div>
 
           <div className="row evenly">
@@ -61,7 +58,7 @@ const InputsAndMethods: React.FC = () => {
 
         <div className="column box yellow">
           <div className="row between">
-            <p className="box">Quantum {quantum}</p>
+            <p className="box">Quantum:</p>
             <input
               className="box"
               type="text"
@@ -70,14 +67,38 @@ const InputsAndMethods: React.FC = () => {
             />
           </div>
 
-          <div className="row">
-            <p className="box">Sobrecarga {sobrecarga}</p>
+          <div className="row between">
+            <p className="box">Sobrecarga:</p>
             <input
               className="box"
               type="text"
               value={sobrecarga}
               onChange={handleSobrecargaChage}
             />
+          </div>
+          <div className="row between center align-items-center">
+            <p className="box">Paginação:</p>
+            <div className="row evenly flex-grow">
+              <div className="align-items-center center">
+                <input
+                  type="radio"
+                  id="FIFO"
+                  name="tipo_escalonamento_paginas"
+                  value="FIFO"
+                  checked
+                />
+                <label htmlFor="FIFO">FIFO</label>
+              </div>
+              <div className="align-items-center center">
+                <input
+                  type="radio"
+                  id="LRU"
+                  name="tipo_escalonamento_paginas"
+                  value="LRU"
+                />
+                <label htmlFor="LRU">LRU</label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
