@@ -1,77 +1,72 @@
-import { SchedulerFactory, SchedulerType } from "../../schedulers";
-import FIFOPageReplacement from "../../paging/fifo";
-import Process from "../../interfaces/Process";
-import PagingAlgorithm from "../../interfaces/PagingAlgorithm";
-import Scheduler from "../../interfaces/Scheduler";
-import { useEffect, useState } from "react";
-import "./MainMemory.css"; // Importando o arquivo CSS para estilização
+import { useState, useEffect } from "react";
+import "./MainMemory.css"; // Importar o arquivo CSS para estilização
 
-function MainMemory() {
+function MatrixComponent() {
+  const pagingData = [
+    { step: 0, ram: [242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN] },
+    { step: 1, ram: [2, 2, 1, 1, 3] },
+    { step: 2, ram: [4, 5, 1, 1, 4] }
+  ];
 
-    let processes: Process[] = [
-      { id: 1, arrivalTime: 0, executionTime: 5, deadline: 20, numPages: 4 },
-      { id: 2, arrivalTime: 2, executionTime: 3, deadline: 17, numPages: 2 },
-      { id: 3, arrivalTime: 4, executionTime: 2, deadline: 8, numPages: 3 },
-      { id: 4, arrivalTime: 6, executionTime: 4, deadline: 10, numPages: 4 },
-      { id: 5, arrivalTime: 8, executionTime: 4, deadline: 5, numPages: 2 },
-    ];
-    
+  const [matrix, setMatrix] = useState<({ value: number | string, address: number } | string | number)[][]>(
+    Array.from({ length: 5 }, () => Array(10).fill("-"))
+  );
+  const [currentStep, setCurrentStep] = useState(0);
 
-    console.log("executando o algoritmo de escalonamento de processos FIFO e paginacao LRU");
-    console.log("processos input: ");
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (currentStep < pagingData.length) {
+        const currentRam = pagingData[currentStep].ram;
+        const newMatrix = matrix.map((row) => [...row]); // Create a copy of the matrix
 
-    let scheduler: Scheduler = SchedulerFactory.createScheduler(SchedulerType.FIFO);
-    let schedule = scheduler.schedule(processes);
+        for (let i = 0; i < currentRam.length; i++) {
+          const value = currentRam[i] !== undefined ? currentRam[i] : "-";
+          const rowIndex = Math.floor(i / 10);
+          const colIndex = i % 10;
+          const address = rowIndex * 10 + colIndex; // Cálculo do endereço
+          newMatrix[rowIndex][colIndex] = { value, address };
+        }
 
-    console.log("escalonamento fifo:");
-    console.log(schedule);
+        // Preenche os elementos restantes com "-"
+        for (let i = currentRam.length; i < 50; i++) {
+          const rowIndex = Math.floor(i / 10);
+          const colIndex = i % 10;
+          newMatrix[rowIndex][colIndex] = "-";
+        }
 
-    let ramSize: number = 20;
-    let pageSize: number = 4;
-    let diskSize: number = 80;
-
-    const fifoPaging: PagingAlgorithm = new FIFOPageReplacement(
-      processes,
-      ramSize,
-      pageSize,
-      diskSize
-    );
-
-    console.log("paginacao FIFO resultante:");
-    const pagingData = fifoPaging.run(schedule);
-    console.log(pagingData);
-  
-    const [currentStep, setCurrentStep] = useState(0);
-    
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setCurrentStep((prevStep) => (prevStep + 1) % pagingData.length);
-      }, 1000);
-  
-      return () => {
+        setMatrix(newMatrix);
+        setCurrentStep((prevStep) => prevStep + 1);
+      } else {
         clearInterval(interval);
-      };
-    }, []);
-  
-    const currentRam = pagingData[currentStep]?.ram || [];
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [currentStep, matrix]);
 
   return (
-    <div className="main-memory-container">
-    <h1>RAM</h1>
-    <h3>step {pagingData[currentStep]?.step}</h3>
-    <div className="ram-frame">
-      {Array.from({ length: 5 }, (_, index) => (
-        <div key={index} className="memory-cell">
-          {currentRam[index] !== undefined ? (
-            <div>{currentRam[index]}</div>
-          ) : (
-            <div>-</div>
-          )}
+    <div className="matrix-container">
+      <h1>RAM</h1>
+      {matrix.map((row: (number | string | { value: number | string, address: number })[], rowIndex: number) => (
+        <div key={rowIndex} className="matrix-row">
+          {row.map((cell: number | string | { value: number | string, address: number }, cellIndex: number) => (
+            <div key={cellIndex} className="matrix-cell">
+              {typeof cell === "object" ? (
+                <div>
+                  <div className="cell-address">{cell.address}</div>
+                  <div className="cell-value">{cell.value}</div>                  
+                </div>
+              ) : (
+                cell
+              )}
+            </div>
+          ))}
         </div>
       ))}
     </div>
-  </div>
   );
 }
 
-export default MainMemory;
+export default MatrixComponent;

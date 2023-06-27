@@ -1,43 +1,46 @@
-.main-memory-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: 20px;
-    width: 250px; 
-    height: 350px; 
-    background-color: gray;
+.matrix-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 50px;
+}
 
-  }
+.matrix-row {
+  display: flex;
+  background-color: white;
+}
 
-  h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: -8px;
-    text-align: center;
-  }
-  
-  h3 {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .ram-frame {
-    display: flex;
-    flex-direction: column;
-    background-color: gray;
-  }
-  
-  .memory-cell {
-    width: 170px;
-    height: 45px;
-    border: 1px solid #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    margin-bottom: 3px;
-  }
-  
+.matrix-cell {
+  padding: 8px;
+  border: 1px solid #000;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1{
+  color: white;
+  margin-bottom: 20px;
+}
+
+.matrix-cell {
+  position: relative;
+}
+
+.matrix-cell .cell-address {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px;
+  font-size: 12px;
+  color: blue;
+  font-style: bold;
+}
+
+.matrix-cell .cell-value {
+  margin-top: 10px;
+}
