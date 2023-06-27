@@ -14,21 +14,18 @@ interface ProcessData {
 }
 const App: React.FC = () => {
   
- const [processData, setProcessData] = useState<ProcessData[]>([]);
- const handleProcessDataChange = (data: ProcessData[]) => {
-  setProcessData(data);
-  };
+ const [processArray, setProcessArray] = useState<ProcessData[]>([]);
 
   function handleClick(){
-    console.log(processData);
+    console.log(processArray);
 
   }
   return (
     <div className="App column">
       <img src={logo} alt="Logo" className="logo" />
       <InputsAndMethods />
-      <CreateProcesses onDataChange={handleProcessDataChange} />
-      <FrontGanttChart processData={processData} />
+      <CreateProcesses processArray={processArray} setProcessArray={setProcessArray} />
+      <FrontGanttChart processArray={processArray} />
       <button onClick={handleClick}>sirí</button>
     </div>
   );

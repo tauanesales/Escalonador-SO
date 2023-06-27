@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Process.css";
 
 interface ProcessProps {
   index: number;
-  onDataChange: (index: number, data: ProcessData) => void;
+  processArray: ProcessData[];
+  setProcessArray: (data: ProcessData[]) => void;
 }
 
 interface ProcessData {
@@ -15,9 +16,9 @@ interface ProcessData {
 }
 
 const Process: React.FC<ProcessProps> = (props) => {
-  const { index, onDataChange } = props;
+  const { index, processArray, setProcessArray} = props;
   const [processData, setProcessData] = useState<ProcessData>({
-    processName: "",
+    processName: index.toString(),
     executionTime: 0,
     deadline: 0,
     numPages: 0,
@@ -26,15 +27,10 @@ const Process: React.FC<ProcessProps> = (props) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setProcessData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    console.log(processData);
-    onDataChange(index, {
-      ...processData, // Pass the updated data from the state
-      [name]: value, // Update the specific field with the new value
-    });
+    const updatedProcessData: ProcessData = { ...processData, [name]: parseInt(value) };
+    console.log(index, updatedProcessData);
+    setProcessData(updatedProcessData); // Update the state
+    setProcessArray(processArray.map((process, i) => (i === index - 1 ? updatedProcessData : process)));
   };
 
   return (
