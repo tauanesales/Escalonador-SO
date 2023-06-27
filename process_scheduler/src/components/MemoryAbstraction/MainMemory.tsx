@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./MainMemory.css"; // Importar o arquivo CSS para estilização
 
-function MatrixComponent() {
+function MainMemory() {
   const pagingData = [
     { step: 0, ram: [242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN] },
     { step: 1, ram: [2, 2, 1, 1, 3] },
@@ -69,4 +69,4 @@ function MatrixComponent() {
   );
 }
 
-export default MatrixComponent;
+export default MainMemory;
