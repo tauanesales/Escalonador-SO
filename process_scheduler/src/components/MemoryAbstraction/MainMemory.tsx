@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./MainMemory.css"; // Importar o arquivo CSS para estilização
+import "./MainMemory.css";
 
 function MainMemory() {
   const pagingData = [
