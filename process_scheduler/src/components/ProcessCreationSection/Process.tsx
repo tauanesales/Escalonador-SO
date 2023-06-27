@@ -9,7 +9,7 @@ interface ProcessProps {
 interface ProcessData {
   processName: string;
   executionTime: number;
-  deadline: number;
+  deadline?: number;
   numPages: number;
   arrivalTime: number;
 }

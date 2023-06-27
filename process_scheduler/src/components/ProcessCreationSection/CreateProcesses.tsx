@@ -36,7 +36,7 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({ onDataChange }) => {
     const newElement = (
       <Process
         key={customElements.length}
-        index={elementCounter}
+        index={elementCounter-1}
         onDataChange={handleProcessDataChange} // Pass the callback function
       />
     );

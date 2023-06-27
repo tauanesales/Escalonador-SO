@@ -3,7 +3,11 @@ import { SchedulerType } from "../../schedulers";
 import Process from "../../interfaces/Process";
 import GanttChart from "../GanttChart";
 
-const InputsAndMethods: React.FC = () => {
+interface InputsAndMethodsProps {
+  processData: ProcessData[];
+}
+
+const InputsAndMethods: React.FC = ({ processData }) => {
   const processes: Process[] = [
     { id: 1, arrivalTime: 0, executionTime: 5, deadline: 20, numPages: 2 },
     { id: 2, arrivalTime: 2, executionTime: 3, deadline: 17, numPages: 2 },
@@ -11,7 +15,9 @@ const InputsAndMethods: React.FC = () => {
     { id: 4, arrivalTime: 6, executionTime: 4, deadline: 10, numPages: 2 },
     { id: 5, arrivalTime: 8, executionTime: 4, deadline: 5, numPages: 2 },
   ];
-
+  function handleClick(){
+    console.log(processData);
+  }
   const [quantum, setQuantumValue] = useState(4);
 
   const [sobrecarga, setSobrecargaValue] = useState(1);
@@ -23,6 +29,7 @@ const InputsAndMethods: React.FC = () => {
     setSobrecargaValue(e.target.value);
   };
 
+  
   return (
     <div>
       <div className="row wrap align-items-start">
@@ -102,6 +109,7 @@ const InputsAndMethods: React.FC = () => {
           </div>
         </div>
       </div>
+      <button onClick={handleClick}>maca</button>
     </div>
   );
 };

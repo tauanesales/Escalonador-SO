@@ -22,7 +22,7 @@ function GanttChart({
   function executeScheduler(): void {
     setSchedule(scheduler.schedule(processes));
   }
-
+  
   return (
     <div>
       <button className={classNameParam} onClick={executeScheduler}>
