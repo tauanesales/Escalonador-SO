@@ -23,6 +23,7 @@ const App: React.FC = () => {
     console.log(processData);
 
   }
+  
   return (
     <div className="App column">
       <img src={logo} alt="Logo" className="logo" />
@@ -30,7 +31,6 @@ const App: React.FC = () => {
       <CreateProcesses onDataChange={handleProcessDataChange} /> */}
 
       <FrontGanttChart processData={processData} />
-      <button onClick={handleClick}>sirí</button>
     </div>
   );
 };
