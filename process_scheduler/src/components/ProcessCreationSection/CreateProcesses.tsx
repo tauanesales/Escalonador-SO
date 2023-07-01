@@ -3,8 +3,7 @@ import "./CreateProcesses.css";
 import Process from "./Process";
 
 interface CreateProcessesProps {
-  processArray: ProcessData[];
-  setProcessArray: (data: ProcessData[]) => void;
+  onDataChange: (data: ProcessData[]) => void;
 }
 
 interface ProcessData {
@@ -14,76 +13,47 @@ interface ProcessData {
   numPages: number;
   arrivalTime: number;
 }
-
-const CreateProcesses: React.FC<CreateProcessesProps> = ({ processArray, setProcessArray }) => {
+const CreateProcesses: React.FC<CreateProcessesProps> = ({ onDataChange }) => {
   const [customElements, setCustomElements] = useState<JSX.Element[]>([]);
-  const [elementCounter, setCounter] = useState<number>(0);
-
+  const [elementCounter, setCounter] = useState<number>(1);
+  const [processData, setProcessData] = useState<ProcessData[]>([]);
   const deleteProcess = (index: number) => {
     const updatedElements = customElements.filter((_, i) => i !== index);
     setCustomElements(updatedElements);
-
     if (updatedElements.length === 0) {
-      setCounter(0);
+      setCounter(1);
     }
-
-    const updatedProcessData = processArray.filter((_, i) => i !== index);
-    setProcessArray(updatedProcessData);
+    const updatedProcessData = processData.filter((_, i) => i !== index);
+    setProcessData(updatedProcessData);
+    onDataChange(updatedProcessData); // Notify the parent component about the updated data
   };
-
   const addProcess = () => {
     const newElement = (
       <Process
-        key={elementCounter}
+        key={customElements.length}
         index={elementCounter}
-        processArray={processArray}
-        setProcessArray={setProcessArray}
+        onDataChange={handleProcessDataChange} // Pass the callback function
       />
     );
     setCustomElements([...customElements, newElement]);
-    
-    const newProcessData: ProcessData = {
-      processName: elementCounter.toString(),
-      executionTime: 0,
-      deadline: 0,
-      numPages: 0,
-      arrivalTime: 0,
-    };
-    
-    setProcessArray([...processArray, newProcessData]);
     setCounter(elementCounter + 1);
+    setProcessData([...processData]);
   };
-
-  // const handleProcessDataChange = (index: number, updatedData: ProcessData) => {
-  //   // Update a specific element in the array by index
-
-  //   console.log("Outside", index, updatedData, processArray);
-  //   const updatedProcessData = processArray.map((data, i) => {
-  //     if (Number(i) === Number(index)) {
-  //       return updatedData;
-  //     }
-  //     return data;
-  //   });
-  //   console.log(updatedProcessData);
-
-  //   setProcessArray(updatedProcessData);
-  // };
-
+  const handleProcessDataChange = (index: number, updatedData: ProcessData) => {
+    const updatedProcessData = [...processData];
+    processData[index] = updatedData; // Assign the updated data directly
+    setProcessData(processData);
+    onDataChange(updatedProcessData); // Notify the parent component about the updated data
+  };
   const logProcessData = () => {
-    console.log(processArray);
+    console.log(processData);
   };
-
   return (
     <div>
-      {processArray.map((data, index) => {
-        return data.toString();
-      })}
-
+      {processData.toString()}
       <button
         className="box align-items-center center button green"
-        onClick={() => {
-          addProcess();
-        }}
+        onClick={addProcess}
       >
         Criar Processo
       </button>
@@ -95,7 +65,7 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({ processArray, setProc
                 className="close-btn small-text center align-items-center pm-0"
                 onClick={() => deleteProcess(index)}
               >
-                ✖
+                :heavy_multiplication_x:
               </button>
               {element}
             </div>
@@ -106,5 +76,4 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({ processArray, setProc
     </div>
   );
 };
-
 export default CreateProcesses;

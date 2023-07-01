@@ -5,6 +5,7 @@ interface ProcessProps {
   index: number;
   processArray: ProcessData[];
   setProcessArray: (data: ProcessData[]) => void;
+  onDataChange: (index: number, updatedData: ProcessData) => void;
 }
 
 interface ProcessData {
