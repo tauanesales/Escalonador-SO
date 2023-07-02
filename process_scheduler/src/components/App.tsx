@@ -4,33 +4,28 @@ import InputsAndMethods from "./ConditionsSection/InputsAndMethods";
 import CreateProcesses from "./ProcessCreationSection/CreateProcesses";
 import FrontGanttChart from "./ChartSection/FrontGanttChart";
 import "./App.css";
+import { IProcess } from "../interfaces/Process";
+import { IConditions } from "../interfaces/Conditions";
 
-interface ProcessData {
-  processName: string;
-  executionTime: number;
-  deadline: number;
-  numPages: number;
-  arrivalTime: number;
-}
+const INITIAL_CONDITIONS: IConditions = {
+  method: "fifo",
+  pagination: "fifo",
+  quantum: 0,
+  sobrecarga: 0,
+};
+
 const App: React.FC = () => {
-  
- const [processData, setProcessData] = useState<ProcessData[]>([]);
- const handleProcessDataChange = (data: ProcessData[]) => {
-  setProcessData(data);
-  };
+  const [processes, setProcesses] = useState<{ [key: string]: IProcess }>({});
+  const [conditions, setConditions] = useState<IConditions>(INITIAL_CONDITIONS);
 
-  function handleClick(){
-    console.log(processData);
+  const processList = Object.values(processes);
 
-  }
-  
   return (
-    <div className="App column">
+    <div className="column">
       <img src={logo} alt="Logo" className="logo" />
-      <InputsAndMethods processData={processData}/>
-      <CreateProcesses onDataChange={handleProcessDataChange} />
-
-      <FrontGanttChart processData={processData} />
+      <InputsAndMethods conditions={conditions} setConditions={setConditions} />
+      <CreateProcesses processes={processes} setProcesses={setProcesses} />
+      <FrontGanttChart processList={processList} conditions={conditions} />
     </div>
   );
 };

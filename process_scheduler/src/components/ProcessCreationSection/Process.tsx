@@ -1,100 +1,82 @@
-import React, { useState } from "react";
+import React, { memo } from "react";
 import "./Process.css";
+import { IProcess } from "../../interfaces/Process";
 
 interface ProcessProps {
-  index: number;
-  onDataChange: (index: number, data: Process) => void;
+  process: IProcess;
+  updateProcess: (
+    processId: string | undefined,
+    key: keyof IProcess,
+    value: number | undefined
+  ) => void;
+  deleteProcess: (processId: string | undefined) => void;
 }
 
-interface ProcessData {
-  processName: string;
-  executionTime: number;
-  deadline?: number;
-  numPages: number;
-  arrivalTime: number;
-}
+const Process: React.FC<ProcessProps> = memo((props) => {
+  const { process, updateProcess, deleteProcess } = props;
 
-interface Process {
-  id: number;
-  arrivalTime: number;
-  executionTime: number;
-  deadline?: number;
-  numPages: number;
-}
-
-const Process: React.FC<ProcessProps> = (props) => {
-  const { index, onDataChange } = props;
-  const [processData, setProcessData] = useState<Process>({
-    id: props.index,
-    executionTime: 0,
-    deadline: 0,
-    numPages: 0,
-    arrivalTime: 0,
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setProcessData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    console.log(processData);
-    onDataChange(index, {
-      ...processData, // Pass the updated data from the state
-      [name]: value, // Update the specific field with the new value
-    });
+    updateProcess(process.id, name as keyof IProcess, parseInt(value));
   };
 
   return (
-    <div className="box yellow between column">
-      <h4>Processos {props.index}</h4>
-      <div className="row between align-items-center wrap">
-        <div className="row flex-grow between p-5">
-          <div>Tempo:</div>
+    <div className="process__card">
+      <header className="process__card__header">
+        <h3 className="process__card__heading">
+          Cód.: <code>{process.id?.substring(0, 6).toUpperCase()}</code>
+        </h3>
+        <button
+          onClick={() => deleteProcess(process.id)}
+          className="process__card__close"
+        >
+          &#x00D7;
+        </button>
+      </header>
+      <form onSubmit={(e) => e.preventDefault()} className="process__card__fields">
+        <label htmlFor="executionTime">
+          <p>Tempo:</p>
           <input
-            className="mw-50"
+            onChange={handleChange}
             type="number"
-            name="executionTime"
-            value={processData.executionTime}
-            onChange={handleInputChange}
+            id={`executionTime-${process.id}`}
+            name={"executionTime" as keyof IProcess}
+            value={process.executionTime}
           />
-        </div>
-        <div className="row flex-grow between p-5">
-          <div>Deadline:</div>
+        </label>
+        <label htmlFor="deadline">
+          <p>Deadline:</p>
           <input
-            className="mw-50"
+            onChange={handleChange}
             type="number"
-            name="deadline"
-            value={processData.deadline}
-            onChange={handleInputChange}
+            id={`deadline-${process.id}`}
+            name={"deadline" as keyof IProcess}
+            value={process.deadline}
           />
-        </div>
-      </div>
-
-      <div className="row between align-items-center wrap">
-        <div className="row flex-grow between p-5">
-          <div>Páginas:</div>
+        </label>
+        <label htmlFor="numPages">
+          <p>Páginas:</p>
           <input
-            className="mw-50"
+            onChange={handleChange}
             type="number"
-            name="numPages"
-            value={processData.numPages}
-            onChange={handleInputChange}
+            id={`numPages-${process.id}`}
+            name={"numPages" as keyof IProcess}
+            value={process.numPages}
           />
-        </div>
-        <div className="row flex-grow between p-5">
-          <div>Chegada:</div>
+        </label>
+        <label htmlFor="arrivalTime">
+          <p>Chegada:</p>
           <input
-            className="mw-50"
+            onChange={handleChange}
             type="number"
-            name="arrivalTime"
-            value={processData.arrivalTime}
-            onChange={handleInputChange}
+            id={`arrivalTime-${process.id}`}
+            name={"arrivalTime" as keyof IProcess}
+            value={process.arrivalTime}
           />
-        </div>
-      </div>
+        </label>
+      </form>
     </div>
   );
-};
+});
 
 export default Process;

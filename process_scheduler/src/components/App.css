@@ -1,19 +1,10 @@
-.App {
-  background: #14114e;
-  display: flex;
-  max-width: 99vw;
-  min-height: 100vh;
-  padding: 5%;
-}
-
 .logo {
-  width: 90px;
-  margin: 0 auto;
+  width: 181px;
+  margin-inline: auto;
+  margin-bottom: 1rem;
 }
 
-.centered-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.column {
+  width: min(100% - 2rem, 1680px);
+  margin-inline: auto;
 }

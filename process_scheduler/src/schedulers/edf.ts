@@ -1,16 +1,16 @@
-import Process from "../interfaces/Process";
+import { IProcess } from "../interfaces/Process";
 import Scheduler from "../interfaces/Scheduler";
 
 export default class EDFScheduler implements Scheduler {
   public schedule(
-    processes: Process[],
+    processes: IProcess[],
     quantum: number = 2,
     overheadTime: number = 1
   ): number[] {
-    let _processes: Process[] = [...processes];
+    let _processes: IProcess[] = [...processes];
 
     let schedule: number[] = [];
-    let currentProcess: Process;
+    let currentProcess: IProcess;
     let counter: number = 0;
     let processIterations: number = 0;
 
@@ -28,7 +28,7 @@ export default class EDFScheduler implements Scheduler {
 
       processIterations = Math.min(currentProcess.executionTime, quantum);
       for (let i = 0; i < processIterations; i++) {
-        schedule[counter] = currentProcess.id;
+        schedule[counter] = currentProcess.id ;
         currentProcess.executionTime -= 1;
         counter++;
       }
@@ -48,14 +48,14 @@ export default class EDFScheduler implements Scheduler {
   }
 
   private getEarliestDeadlineProcess(
-    processes: Process[],
+    processes: IProcess[],
     arrivedProcesses: number[]
   ): number {
     let earliestDeadline: number = Infinity;
     let earliestDeadlineIndex: number = -1;
 
     for (let i = 0; i < arrivedProcesses.length; i++) {
-      let process: Process = processes[arrivedProcesses[i]];
+      let process: IProcess = processes[arrivedProcesses[i]];
       let deadline: number = (process.deadline as number) + process.arrivalTime;
       if (deadline < earliestDeadline) {
         earliestDeadline = deadline;
