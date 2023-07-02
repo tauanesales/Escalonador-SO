@@ -3,8 +3,7 @@ import logo from "../assets/img/logo.png";
 import InputsAndMethods from "./ConditionsSection/InputsAndMethods";
 import CreateProcesses from "./ProcessCreationSection/CreateProcesses";
 import FrontGanttChart from "./ChartSection/FrontGanttChart";
-import MainMemory from "./MemoryAbstraction/RAM/MainMemory";
-import Disk from "./MemoryAbstraction/Disk/Disk";
+import MomoriesComponent from "./MemoryAbstraction/MemoriesComponent";
 import "./App.css";
 
 interface ProcessData {
@@ -32,8 +31,7 @@ const App: React.FC = () => {
       <CreateProcesses onDataChange={handleProcessDataChange} />
       <FrontGanttChart processData={processData} />
       <button onClick={handleClick}>sirí</button>
-      <MainMemory />
-      <Disk />
+      <MomoriesComponent />
     </div>
   );
 };

@@ -9,7 +9,7 @@ function DiskMemory() {
   ];
 
   const [matrix, setMatrix] = useState<({ value: number | string, address: number } | string | number)[][]>(
-    Array.from({ length: 12 }, () => Array(10).fill("-"))
+    Array.from({ length: 10 }, () => Array(12).fill("-"))
   );
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -21,17 +21,16 @@ function DiskMemory() {
 
         for (let i = 0; i < currentDisco.length; i++) {
           const value = currentDisco[i];
-          const rowIndex = Math.floor(i / 10); // Cálculo do index da linha
-          const colIndex = i % 10; // Cálculo do deslocamento dentro da linha
-          const address = rowIndex * 10 + colIndex; // Cálculo do endereço
+          const colIndex = i % 12; // Cálculo do índice da coluna
+          const rowIndex = Math.floor(i / 12); // Cálculo do índice da linha
+          const address = rowIndex * 12 + colIndex; // Cálculo do endereço
           newMatrix[rowIndex][colIndex] = { value, address };
         }
 
         // Preenche os elementos restantes com "-"
-
         for (let i = currentDisco.length; i < 120; i++) {
-          const rowIndex = Math.floor(i / 10);
-          const colIndex = i % 10;
+          const colIndex = i % 12;
+          const rowIndex = Math.floor(i / 12);
           newMatrix[rowIndex][colIndex] = "-";
         }
 
