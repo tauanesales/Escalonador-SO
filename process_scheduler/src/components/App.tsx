@@ -27,8 +27,8 @@ const App: React.FC = () => {
   return (
     <div className="App column">
       <img src={logo} alt="Logo" className="logo" />
-      { /*<InputsAndMethods processData={processData}/>
-      <CreateProcesses onDataChange={handleProcessDataChange} /> */}
+      <InputsAndMethods processData={processData}/>
+      <CreateProcesses onDataChange={handleProcessDataChange} />
 
       <FrontGanttChart processData={processData} />
     </div>

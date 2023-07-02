@@ -1,6 +1,7 @@
 import ChartBox from "./ChartBox";
 
 const ProcessRow: React.FC<any> = (props) => {
+
   function handleClick() {
     console.log(props.process.arrivalTime);
   }
@@ -26,12 +27,12 @@ const ProcessRow: React.FC<any> = (props) => {
     });
   }
 
+
   return (
     <div className="row align-items-center">
       {props.processName}:
       {renderRow()} {/* Invoke the renderRow function */}
       <button onClick={handleClick}>macaco</button>
-
     </div>
   );
 };

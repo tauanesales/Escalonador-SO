@@ -3,7 +3,7 @@ import "./Process.css";
 
 interface ProcessProps {
   index: number;
-  onDataChange: (index: number, data: ProcessData) => void;
+  onDataChange: (index: number, data: Process) => void;
 }
 
 interface ProcessData {
@@ -14,10 +14,18 @@ interface ProcessData {
   arrivalTime: number;
 }
 
+interface Process {
+  id: number;
+  arrivalTime: number;
+  executionTime: number;
+  deadline?: number;
+  numPages: number;
+}
+
 const Process: React.FC<ProcessProps> = (props) => {
   const { index, onDataChange } = props;
-  const [processData, setProcessData] = useState<ProcessData>({
-    processName: "",
+  const [processData, setProcessData] = useState<Process>({
+    id: props.index,
     executionTime: 0,
     deadline: 0,
     numPages: 0,
@@ -39,13 +47,7 @@ const Process: React.FC<ProcessProps> = (props) => {
 
   return (
     <div className="box yellow between column">
-      <input
-        className="box"
-        type="text"
-        name="processName"
-        value={processData.processName}
-        onChange={handleInputChange}
-      />
+      <h4>Processos {props.index}</h4>
       <div className="row between align-items-center wrap">
         <div className="row flex-grow between p-5">
           <div>Tempo:</div>
