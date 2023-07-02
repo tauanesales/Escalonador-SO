@@ -17,12 +17,12 @@ function MainMemory() {
     const interval = setInterval(() => {
       if (currentStep < pagingData.length) {
         const currentRam = pagingData[currentStep].ram;
-        const newMatrix = matrix.map((row) => [...row]); // Create a copy of the matrix
+        const newMatrix = matrix.map((row) => [...row]); // Copia da matriz
 
         for (let i = 0; i < currentRam.length; i++) {
-          const value = currentRam[i] !== undefined ? currentRam[i] : "-";
-          const rowIndex = Math.floor(i / 10);
-          const colIndex = i % 10;
+          const value = currentRam[i];
+          const rowIndex = Math.floor(i / 10); // Cálculo do index da linha
+          const colIndex = i % 10; // Cálculo do deslocamento dentro da linha
           const address = rowIndex * 10 + colIndex; // Cálculo do endereço
           newMatrix[rowIndex][colIndex] = { value, address };
         }
