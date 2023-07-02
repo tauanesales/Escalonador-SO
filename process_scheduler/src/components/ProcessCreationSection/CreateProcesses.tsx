@@ -1,6 +1,6 @@
 import React from "react";
 import "./CreateProcesses.css";
-// import { generateId } from "../../helper/generateId";
+import { generateId } from "../../helper/generateId";
 import { IProcess } from "../../interfaces/Process";
 import Process from "./Process";
 
@@ -34,7 +34,7 @@ const INITIAL_PROCESS: IProcess = {
 
 const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcesses }) => {
   const createProcess = (process: IProcess) => {
-    const id = "0"; // generateId(processes);
+    const id = generateId(processes);
     const newProcesses = { ...processes };
     newProcesses[id] = { ...process, id };
     setProcesses(newProcesses);
