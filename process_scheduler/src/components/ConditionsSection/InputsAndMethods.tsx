@@ -1,108 +1,84 @@
-import React, { useState } from "react";
-import { SchedulerType } from "../../schedulers";
-import Process from "../../interfaces/Process";
-import GanttChart from "../GanttChart";
+import React from "react";
+import { IConditions } from "../../interfaces/Conditions";
+import "./InputsAndMethods.css";
+import logo from "../../assets/img/logo.png";
+import logoIC from "../../assets/img/logoICvert_azulUFBA.png";
 
-const InputsAndMethods: React.FC = () => {
-  const processes: Process[] = [
-    { id: 1, arrivalTime: 0, executionTime: 5, deadline: 20, numPages: 2 },
-    { id: 2, arrivalTime: 2, executionTime: 3, deadline: 17, numPages: 2 },
-    { id: 3, arrivalTime: 4, executionTime: 2, deadline: 8, numPages: 2 },
-    { id: 4, arrivalTime: 6, executionTime: 4, deadline: 10, numPages: 2 },
-    { id: 5, arrivalTime: 8, executionTime: 4, deadline: 5, numPages: 2 },
-  ];
+interface InputsAndMethodsProps {
+  conditions: IConditions;
+  setConditions: React.Dispatch<React.SetStateAction<IConditions>>;
+}
 
-  const [quantum, setQuantumValue] = useState(4);
+const methodOptions: IConditions["method"][] = ["edf", "fifo", "rr", "sjf"];
+const paginationOptions: IConditions["pagination"][] = ["fifo", "lru"];
 
-  const [sobrecarga, setSobrecargaValue] = useState(1);
-
-  const handleQuantumChange = (e: any) => {
-    setQuantumValue(e.target.value);
-  };
-  const handleSobrecargaChage = (e: any) => {
-    setSobrecargaValue(e.target.value);
+const InputsAndMethods = ({ conditions, setConditions }: InputsAndMethodsProps) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setConditions({ ...conditions, [id]: value ? parseInt(value) : "" });
   };
 
   return (
-    <div>
-      <div className="row wrap align-items-start">
-        <div className="column flex-grow yellow box mw-200">
-          <div className="box">Seleção de Métodos</div>
+    <div className="methods__form__wrapper">
+	<img src={logo} alt="Logo" className="logo" />
+	<img src={logoIC} alt="LogoIC" className="logo" />
+    <form className="methods__form" onSubmit={(e) => e.preventDefault()}>
+      <div className="methods">
+        <h2 className="methods__heading">Selecione o método:</h2>
+        <menu className="methods__options">
+          {methodOptions.map((method) => (
+            <li key={method}>
+              <button
+                onClick={() => setConditions({ ...conditions, method })}
+                aria-selected={conditions.method === method || undefined}
+                className="methods__button"
+              >
+                {method}
+              </button>
+            </li>
+          ))}
+        </menu>
+      </div>
 
-          <div className="row evenly">
-            <GanttChart
-              classNameParam="box button blue"
-              processes={processes}
-              schedulerType={SchedulerType.FIFO}
+      <div className="methods__bottom">
+        <div className="methods__bottom_qo">
+          <label htmlFor="quantum" className="methods__bottom_field">
+            <p>Quantum: </p>
+            <input
+              onChange={handleChange}
+              type="number"
+              id="quantum"
+              placeholder="0"
+              value={conditions.quantum}
             />
-            <GanttChart
-              classNameParam="box button blue"
-              processes={processes}
-              schedulerType={SchedulerType.RoundRobin}
-            />
-          </div>
-
-          <div className="row evenly">
-            <GanttChart
-              classNameParam="box button blue"
-              processes={processes}
-              schedulerType={SchedulerType.SJF}
-            />
-            <GanttChart
-              classNameParam="box button blue"
-              processes={processes}
-              schedulerType={SchedulerType.EDF}
-            />
-          </div>
+          </label>
+          <label htmlFor="overload" className="methods__bottom_field">
+            <p>Sobrecarga: </p>
+            <input onChange={handleChange} type="number" id="overload" placeholder="0" />
+          </label>
         </div>
 
-        <div className="column box yellow">
-          <div className="row between">
-            <p className="box">Quantum:</p>
-            <input
-              className="box"
-              type="text"
-              value={quantum}
-              onChange={handleQuantumChange}
-            />
-          </div>
-
-          <div className="row between">
-            <p className="box">Sobrecarga:</p>
-            <input
-              className="box"
-              type="text"
-              value={sobrecarga}
-              onChange={handleSobrecargaChage}
-            />
-          </div>
-          <div className="row between center align-items-center">
-            <p className="box">Paginação:</p>
-            <div className="row evenly flex-grow">
-              <div className="align-items-center center">
-                <input
-                  type="radio"
-                  id="FIFO"
-                  name="tipo_escalonamento_paginas"
-                  value="FIFO"
-                  checked
-                />
-                <label htmlFor="FIFO">FIFO</label>
-              </div>
-              <div className="align-items-center center">
-                <input
-                  type="radio"
-                  id="LRU"
-                  name="tipo_escalonamento_paginas"
-                  value="LRU"
-                />
-                <label htmlFor="LRU">LRU</label>
-              </div>
-            </div>
+        <div className="methods__pagination">
+          <h2 className="methods__pagination__title">Paginação: </h2>
+          <div className="methods__pagination__options">
+            <menu>
+              {paginationOptions.map((pagination) => (
+                <li key={pagination}>
+                  <button
+                    onClick={() => setConditions({ ...conditions, pagination })}
+                    className="methods__pagination__button"
+                    aria-selected={conditions.pagination === pagination || undefined}
+                  >
+                    {pagination}
+                  </button>
+                </li>
+              ))}
+            </menu>
           </div>
         </div>
       </div>
-    </div>
+    </form>
+	</div>
   );
 };
 

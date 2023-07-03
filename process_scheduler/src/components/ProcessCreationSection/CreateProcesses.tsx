@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import "./CreateProcesses.css";
+import { generateId } from "../../helper/generateId";
+import { IProcess } from "../../interfaces/Process";
 import Process from "./Process";
 
 interface CreateProcessesProps {
-  onDataChange: (data: ProcessData[]) => void;
+  processes: {
+    [key: string]: IProcess;
+  };
+  setProcesses: React.Dispatch<
+    React.SetStateAction<{
+      [key: number]: IProcess;
+    }>
+  >;
+  onDataChange?: (data: ProcessData[]) => void;
 }
 
 interface ProcessData {
@@ -12,68 +22,68 @@ interface ProcessData {
   deadline: number;
   numPages: number;
   arrivalTime: number;
+  processArray: IProcess;
 }
-const CreateProcesses: React.FC<CreateProcessesProps> = ({ onDataChange }) => {
-  const [customElements, setCustomElements] = useState<JSX.Element[]>([]);
-  const [elementCounter, setCounter] = useState<number>(1);
-  const [processData, setProcessData] = useState<ProcessData[]>([]);
-  const deleteProcess = (index: number) => {
-    const updatedElements = customElements.filter((_, i) => i !== index);
-    setCustomElements(updatedElements);
-    if (updatedElements.length === 0) {
-      setCounter(1);
-    }
-    const updatedProcessData = processData.filter((_, i) => i !== index);
-    setProcessData(updatedProcessData);
-    onDataChange(updatedProcessData); // Notify the parent component about the updated data
+
+const INITIAL_PROCESS: IProcess = {
+  arrivalTime: 0,
+  deadline: 0,
+  executionTime: 0,
+  numPages: 0,
+};
+
+const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcesses }) => {
+  const createProcess = (process: IProcess) => {
+    const id = generateId(processes);
+    const newProcesses = { ...processes };
+    newProcesses[id] = { ...process, id };
+    setProcesses(newProcesses);
   };
-  const addProcess = () => {
-    const newElement = (
-      <Process
-        key={customElements.length}
-        index={elementCounter}
-        onDataChange={handleProcessDataChange} // Pass the callback function
-      />
-    );
-    setCustomElements([...customElements, newElement]);
-    setCounter(elementCounter + 1);
-    setProcessData([...processData]);
+
+  const updateProcess = (
+    processId: string | undefined,
+    key: keyof IProcess,
+    value: number | undefined
+  ) => {
+    if (!processId) return;
+    const newProcesses = { ...processes };
+    newProcesses[processId] = {
+      ...newProcesses[processId],
+      [key]: value,
+    };
+    setProcesses(newProcesses);
   };
-  const handleProcessDataChange = (index: number, updatedData: ProcessData) => {
-    const updatedProcessData = [...processData];
-    processData[index] = updatedData; // Assign the updated data directly
-    setProcessData(processData);
-    onDataChange(updatedProcessData); // Notify the parent component about the updated data
+
+  const deleteProcess = (processId: string | undefined) => {
+    if (!processId) return;
+    const newProcesses = { ...processes };
+    delete newProcesses[processId];
+    setProcesses(newProcesses);
   };
-  const logProcessData = () => {
-    console.log(processData);
-  };
+
   return (
-    <div>
-      {processData.toString()}
-      <button
-        className="box align-items-center center button green"
-        onClick={addProcess}
-      >
-        Criar Processo
-      </button>
-      {customElements.length > 0 ? (
-        <div id="process-box column" className="large-box row">
-          {customElements.map((element, index) => (
-            <div key={index}>
-              <button
-                className="close-btn small-text center align-items-center pm-0"
-                onClick={() => deleteProcess(index)}
-              >
-                :heavy_multiplication_x:
-              </button>
-              {element}
-            </div>
-          ))}
-        </div>
-      ) : null}
-      <button onClick={logProcessData}>Log Process Data</button>
-    </div>
+    <section className="create__process">
+      <div className="create__process__heading"></div>
+      <ol className="process__list">
+	    <li>
+          <button
+            onClick={() => createProcess(INITIAL_PROCESS)}
+            className="create__process__button"
+          >
+            Criar processo
+          </button>
+        </li>
+        {Object.values(processes).map((process) => (
+          <li key={process.id}>
+            <Process
+              process={process}
+              updateProcess={updateProcess}
+              deleteProcess={deleteProcess}
+            />
+          </li>
+        ))}
+      </ol>
+    </section>
   );
 };
 export default CreateProcesses;

@@ -1,5 +1,5 @@
-export default interface Process {
-  id: number;
+export interface IProcess {
+  id?: string;
   arrivalTime: number;
   executionTime: number;
   deadline?: number;

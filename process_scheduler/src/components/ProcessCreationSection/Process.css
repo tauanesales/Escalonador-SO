@@ -1,8 +1,68 @@
-input {
-  width: 15px;
+.process__card {
+  display: flex;
+  flex-direction: row;
+  background-color: #14114e;
+  padding: 1rem;
+  border-radius: 1rem;
+  gap: 1rem;
+  box-shadow: 0px 0px 3px black;
 }
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+
+.process__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.process__card__heading {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #fff;
+}
+
+.process__card__fields {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.process__card label {
+  gap: 1rem;
+  width: 100%;
+}
+.process__card label > p {
+  color: white;
+}
+
+.process__card input {
+  font-size: 1rem;
+  width: 100%;
+  padding: 0.4rem;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #0d0b34;
+}
+
+.process__card input:focus {
+  outline: 2px solid #87cefa;
+  outline-offset: 2px;
+}
+
+.process__card__header {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+}
+
+.process__card__close {
+  font-size: 1.25rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5rem;
+  background-color: #ff7e7e;
+  color: #ff7e7e;
 }
