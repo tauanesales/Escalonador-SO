@@ -1,8 +1,8 @@
-import Process from "./Process";
+import IProcess from "./Process";
 
 export default interface Scheduler {
   schedule(
-    processes: Process[],
+    processes: IProcess[],
     quantum?: number,
     overheadTime?: number
   ): number[];

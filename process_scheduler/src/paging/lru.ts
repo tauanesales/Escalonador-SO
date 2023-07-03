@@ -1,4 +1,4 @@
-import Process from "../interfaces/Process";
+import {IProcess} from "../interfaces/Process";
 import LRUQueue from "../data/LRUQueue";
 import AbsPaging from "./AbsPaging";
 
@@ -6,7 +6,7 @@ export default class LRUPageReplacement extends AbsPaging {
   private LRUQueue: LRUQueue;
 
   constructor(
-    processes: Process[],
+    processes: IProcess[],
     ramSize: number,
     pageSize: number,
     diskSize: number

@@ -1,5 +1,5 @@
 import { SchedulerFactory, SchedulerType } from "./schedulers";
-import FIFOPageReplacement from "./paging/fifo";
+//import FIFOPageReplacement from "./paging/fifo";
 import LRUPageReplacement from "./paging/lru";
 import {IProcess} from "./interfaces/Process";
 import PagingAlgorithm from "./interfaces/PagingAlgorithm";
@@ -31,7 +31,7 @@ console.log(schedule);
 let ramSize: number = 20;
 let pageSize: number = 4;
 let diskSize: number = 80;
-const fifoPaging: PagingAlgorithm = new LRUPageReplacement(
+const lruPaging: PagingAlgorithm = new LRUPageReplacement(
   processes,
   ramSize,
   pageSize,
@@ -39,7 +39,7 @@ const fifoPaging: PagingAlgorithm = new LRUPageReplacement(
 );
 
 console.log("paginacao LRU resultante:");
-console.log(fifoPaging.run(schedule));
+console.log(lruPaging.run(schedule));
 
 /// algo Escalonamento: RoundRObin, algo Paginacao: FIFO
 processes = [
@@ -58,17 +58,17 @@ for (const process of processes) {
   console.log(process);
 }
 
-scheduler = SchedulerFactory.createScheduler(SchedulerType.RoundRobin);
+scheduler = SchedulerFactory.createScheduler(SchedulerType.FIFO);
 schedule = scheduler.schedule(processes);
 
 console.log("escolonamento Round Robin:");
 console.log(schedule);
 
-ramSize = 20;
+ramSize = 200;
 pageSize = 4;
-diskSize = 80;
+diskSize = 480;
 
-const lruPaging: PagingAlgorithm = new FIFOPageReplacement(
+const lruPaging1: PagingAlgorithm = new LRUPageReplacement(
   processes,
   ramSize,
   pageSize,
@@ -76,4 +76,4 @@ const lruPaging: PagingAlgorithm = new FIFOPageReplacement(
 );
 
 console.log("paginacao FIFO resultante:");
-console.log(lruPaging.run(schedule));
+console.log(lruPaging1.run(schedule));

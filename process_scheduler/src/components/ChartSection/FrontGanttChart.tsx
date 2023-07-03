@@ -3,25 +3,21 @@ import "./FrontGanttChart.css";
 import { IProcess } from "../../interfaces/Process";
 import ChartBox from "./ChartBox";
 import { IConditions } from "../../interfaces/Conditions";
-import { SchedulerFactory, SchedulerType }  from "../../schedulers";
-import Scheduler from "../../interfaces/Scheduler";
 
 interface FrontGanttChartProps {
   processList: IProcess[];
   conditions: IConditions;
   schedule: number[];
+  play: boolean;
 }
 
-const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processList, schedule }) => {
+const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processList, schedule, play }) => {
 
   const [matrix, setMatrix] = useState<number[][]>([]);
   const [columns, setColumns] = useState<JSX.Element[]>([]);
   const [turnaround, setTurnaround] = useState<number>();
 
-  const handleStart = () => {
-    if (!processList.length) return;
-    renderColumn();
-  };
+
   const handleClick= ()=>{
    
     console.log(conditions);
@@ -134,10 +130,11 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
     }
   }, [schedule]);
 
-  
+  useEffect( () => {
+    renderColumn();
+  }, [play])
   return (
     <div className="box chart">
-      <button onClick={handleStart}>Start</button><br/>
       <button onClick={handleReset}> reset</button> <br/>
       <button onClick={handleClick}>siri</button>
       <p>turnaround: {turnaround}</p>
