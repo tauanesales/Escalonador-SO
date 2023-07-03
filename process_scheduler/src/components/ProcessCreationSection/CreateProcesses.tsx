@@ -86,4 +86,5 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcess
     </section>
   );
 };
+
 export default CreateProcesses;

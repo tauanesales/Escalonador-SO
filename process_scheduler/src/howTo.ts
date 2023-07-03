@@ -1,12 +1,12 @@
 import { SchedulerFactory, SchedulerType } from "./schedulers";
 import FIFOPageReplacement from "./paging/fifo";
 import LRUPageReplacement from "./paging/lru";
-import Process from "./interfaces/Process";
+import {IProcess} from "./interfaces/Process";
 import PagingAlgorithm from "./interfaces/PagingAlgorithm";
 import Scheduler from "./interfaces/Scheduler";
 
 /// algo Escalonamento: FIFO, algo Paginacao: LRU
-let processes: Process[] = [
+let processes: IProcess[] = [
   { id: 1, arrivalTime: 0, executionTime: 5, deadline: 20, numPages: 4 },
   { id: 2, arrivalTime: 2, executionTime: 3, deadline: 17, numPages: 2 },
   { id: 3, arrivalTime: 4, executionTime: 2, deadline: 8, numPages: 3 },
@@ -15,7 +15,7 @@ let processes: Process[] = [
 ];
 
 console.log(
-  "executando o algoritmo de escalonamento de processos FIFO, e paginacao LRU"
+  "executando o algoritmo de escalonamento de Iprocessos FIFO, e paginacao LRU"
 );
 console.log("processos input: ");
 for (const process of processes) {

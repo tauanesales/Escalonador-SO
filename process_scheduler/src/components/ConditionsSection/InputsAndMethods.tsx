@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { IConditions } from "../../interfaces/Conditions";
 import "./InputsAndMethods.css";
 
@@ -7,14 +7,17 @@ interface InputsAndMethodsProps {
   setConditions: React.Dispatch<React.SetStateAction<IConditions>>;
 }
 
-const methodOptions: IConditions["method"][] = ["edf", "fifo", "rr", "sjf"];
+const methodOptions: IConditions["method"][] = ["EDF", "FIFO", "RR", "SJF"];
 const paginationOptions: IConditions["pagination"][] = ["fifo", "lru"];
 
-const InputsAndMethods = ({ conditions, setConditions }: InputsAndMethodsProps) => {
+const   InputsAndMethods = ({ conditions, setConditions }: InputsAndMethodsProps) => {
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setConditions({ ...conditions, [id]: value ? parseInt(value) : "" });
   };
+
+  useState
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
@@ -43,13 +46,17 @@ const InputsAndMethods = ({ conditions, setConditions }: InputsAndMethodsProps) 
               onChange={handleChange}
               type="number"
               id="quantum"
-              placeholder="0"
+              placeholder= "0"
               value={conditions.quantum}
             />
           </label>
           <label htmlFor="overload" className="methods__bottom_field">
             <p>Sobrecarga: </p>
-            <input onChange={handleChange} type="number" id="overload" placeholder="0" />
+            <input onChange={handleChange}
+            type="number" 
+            id="sobrecarga" 
+            placeholder="0" 
+            value={conditions.sobrecarga} />
           </label>
         </div>
 
@@ -69,6 +76,16 @@ const InputsAndMethods = ({ conditions, setConditions }: InputsAndMethodsProps) 
                 </li>
               ))}
             </menu>
+            <input
+                id="intervalo"
+                type="range"
+                min="125"
+                max="2000"
+                step="125"
+                value={conditions.intervalo}
+                onChange={handleChange}
+             />
+             {conditions.intervalo/1000} segundos
           </div>
         </fieldset>
       </div>

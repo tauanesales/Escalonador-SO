@@ -1,6 +1,7 @@
 export interface IConditions {
-  method: "fifo" | "rr" | "sjf" | "edf";
+  method: "FIFO" | "RR" | "SJF" | "EDF";
   pagination: "fifo" | "lru";
   quantum: number;
   sobrecarga: number;
+  intervalo: number;
 }

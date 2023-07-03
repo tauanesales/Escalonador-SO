@@ -1,5 +1,5 @@
 export interface IProcess {
-  id?: string;
+  id: number;
   arrivalTime: number;
   executionTime: number;
   deadline?: number;
