@@ -2,7 +2,7 @@ name: Auto-deploy React App
 
 on:
   push:
-    branches: ["main", "front"]
+    branches: ["main", "front", "animation"]
     paths:
       - "process_scheduler/**"
       - ".github/workflows/autodeploy.yml"
