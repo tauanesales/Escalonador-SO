@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Process from "../interfaces/Process";
+import { IProcess } from "../interfaces/Process";
 import Scheduler from "../interfaces/Scheduler";
 import { SchedulerType, SchedulerFactory } from "../schedulers";
 
 interface GanttChartInput {
   classNameParam: string;
-  processes: Process[];
+  processes: IProcess[];
   schedulerType: SchedulerType;
 }
 

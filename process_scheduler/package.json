@@ -1,6 +1,6 @@
 {
   "name": "process_scheduler",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "homepage": "https://tauane.artadevs.tech/Escalonador-SO/",
   "private": true,
   "type": "module",

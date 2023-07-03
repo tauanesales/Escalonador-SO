@@ -1,4 +1,4 @@
-import IProcess from "./Process";
+import { IProcess } from "./Process";
 
 export default interface Scheduler {
   schedule(

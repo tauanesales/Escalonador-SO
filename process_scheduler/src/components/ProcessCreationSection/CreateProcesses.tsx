@@ -25,7 +25,7 @@ interface ProcessData {
   processArray: IProcess;
 }
 
-const INITIAL_PROCESS: IProcess = {
+const INITIAL_PROCESS: IProcess | any = {
   arrivalTime: 0,
   deadline: 0,
   executionTime: 0,

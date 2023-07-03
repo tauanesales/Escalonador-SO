@@ -30,7 +30,7 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
 
   function create_matrix() {
     const newmatrix: number[][] = [];
-    const last_index_list = schedule.map((currentElement, index) => {
+    const last_index_list = schedule.map((_currentElement, index) => {
       return schedule.lastIndexOf(index + 1);
     });
     let last_element = 0;
@@ -65,7 +65,7 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
     const renderAsync = async () => {
       for (let current_time = 0; current_time < matrix.length; current_time++) {
         const column = matrix[current_time].reduce(
-          (accumulator: JSX.Element, proc, process_index) => {
+          (accumulator: JSX.Element, proc, _process_index) => {
             switch (proc) {
               case -1:
                 return (
