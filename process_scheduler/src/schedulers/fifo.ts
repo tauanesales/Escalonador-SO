@@ -3,7 +3,9 @@ import Scheduler from "../interfaces/Scheduler";
 
 class FIFOScheduler implements Scheduler {
   public schedule(processes: IProcess[]): number[] {
-    const processesQueue: IProcess[] = [...processes].sort(
+    const processesQueue: IProcess[] = [...processes]
+    .map((obj) => Object.assign({}, obj) )
+    .sort(
       (p1, p2) => p1.arrivalTime - p2.arrivalTime
     );
 

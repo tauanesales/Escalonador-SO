@@ -7,7 +7,7 @@ export default class EDFScheduler implements Scheduler {
     quantum: number = 2,
     overheadTime: number = 1
   ): number[] {
-    let _processes: IProcess[] = [...processes];
+    let _processes: IProcess[] = [...processes].map((process) => Object.assign({}, process));
 
     let schedule: number[] = [];
     let currentProcess: IProcess;
@@ -25,6 +25,7 @@ export default class EDFScheduler implements Scheduler {
       );
 
       currentProcess = _processes[earliestDeadlineIndex];
+      // currentProcess = _processes[earliestDeadlineIndex];
 
       processIterations = Math.min(currentProcess.executionTime, quantum);
       for (let i = 0; i < processIterations; i++) {

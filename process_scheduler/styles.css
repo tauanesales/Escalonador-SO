@@ -1,6 +1,9 @@
 /* Root global variables */
 :root {
-  --chart-background-color: azure;
+  /* --chart-background-color: gray; */
+  --chart-background-color: transparent;
+  --empty-color: azure;
+  /* --empty-color: transparent; */
   --wait-box: yellow;
   --processing-box: #00ff00;
   --switch-box: #ff0000;

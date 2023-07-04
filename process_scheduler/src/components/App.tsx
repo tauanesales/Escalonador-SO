@@ -22,6 +22,7 @@ const App: React.FC = () => {
  const [processes, setProcesses] = useState<{ [key: string]: IProcess }>({});
   const [conditions, setConditions] = useState<IConditions>(INITIAL_CONDITIONS);
   const [schedule, setSchedule] = useState<number[]>([]);
+  const [save, setSave] = useState<boolean>(true);
   const [play, setPlay] = useState<boolean>(true);
   // const processList : IProcess[]= [
   //   { id: 1, arrivalTime: 0, executionTime: 10, deadline: 20, numPages: 4 },
@@ -33,7 +34,7 @@ const App: React.FC = () => {
 
   
  const processList = Object.values(processes);
- console.log(processList);
+//  console.log(processList);
 
 
  useEffect(() => {
@@ -41,13 +42,17 @@ const App: React.FC = () => {
     const schedulerType: string = conditions.method;
     const createdScheduler: Scheduler = SchedulerFactory.createScheduler(schedulerType as SchedulerType);
     const createdSchedule = createdScheduler.schedule(processList, conditions.quantum, conditions.sobrecarga);
-     setSchedule(createdSchedule);
+    setSchedule(createdSchedule);
+    console.log("CreatedSchedule", createdSchedule);
+    setTimeout(() => {
+      setPlay(!play)
+   }, 500);
   }
-}, [conditions.method, conditions.quantum, conditions.sobrecarga]);
+}, [save]);
   function handleClick(){
     console.log(schedule);
     
-    setPlay(!play);
+    setSave(!save);
   }
   return (
     <div className="column">

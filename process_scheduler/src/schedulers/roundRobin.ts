@@ -8,7 +8,7 @@ export default class RoundRobinScheduler implements Scheduler {
     quantum: number = 2,
     overheadTime: number = 1
   ): number[] {
-    let _processes: IProcess[] = [...processes];
+    let _processes: IProcess[] = [...processes].map((obj) => Object.assign({}, obj) );
     let schedule: number[] = [];
     let currentProcess: IProcess;
     let counter: number = 0;
@@ -33,7 +33,7 @@ export default class RoundRobinScheduler implements Scheduler {
       currentProcess = _processes[processIndex];
 
       // quantum time execution
-      processIterations = Math.min(currentProcess.executionTime, quantum);
+      processIterations = Math.min(currentProcess?.executionTime, quantum);
       for (let i = 0; i < processIterations; i++) {
         schedule[counter] = currentProcess.id;
         currentProcess.executionTime -= 1;
