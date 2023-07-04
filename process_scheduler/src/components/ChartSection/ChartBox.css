@@ -2,9 +2,10 @@
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   text-align: center;
   vertical-align: middle;
+  border-radius: 0.25rem;
 }
 
 .wait-box {
@@ -20,5 +21,6 @@
 }
 
 .hidden-box {
-  background-color: var(--chart-background-color);
+  background-color: transparent;
+  /* background-color: var(--chart-background-color); */
 }

@@ -135,8 +135,8 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
   }, [play])
   return (
     <div className="box chart">
-      <button onClick={handleReset}> reset</button> <br/>
-      <button onClick={handleClick}>siri</button>
+      <button onClick={handleReset}>Reset</button> <br/>
+      <button onClick={handleClick}>Logs</button>
       <p>turnaround: {turnaround}</p>
       <br />
       <div className="chart__wrapper">{columns}</div>

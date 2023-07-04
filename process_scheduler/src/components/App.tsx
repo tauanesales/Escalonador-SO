@@ -8,6 +8,7 @@ import { IProcess } from "../interfaces/Process";
 import { IConditions } from "../interfaces/Conditions";
 import { SchedulerFactory, SchedulerType }  from "../schedulers";
 import Scheduler from "../interfaces/Scheduler";
+import CreateProcesses from "./ProcessCreationSection/CreateProcesses";
 
 const INITIAL_CONDITIONS: IConditions = {
   method: "FIFO",
@@ -18,20 +19,22 @@ const INITIAL_CONDITIONS: IConditions = {
 };
 
 const App: React.FC = () => {
-//  const [processes, setProcesses] = useState<{ [key: string]: IProcess }>({});
+ const [processes, setProcesses] = useState<{ [key: string]: IProcess }>({});
   const [conditions, setConditions] = useState<IConditions>(INITIAL_CONDITIONS);
   const [schedule, setSchedule] = useState<number[]>([]);
   const [play, setPlay] = useState<boolean>(true);
-  const processList : IProcess[]= [
-    { id: 1, arrivalTime: 0, executionTime: 5, deadline: 20, numPages: 4 },
-    { id: 2, arrivalTime: 2, executionTime: 3, deadline: 17, numPages: 2 },
-    { id: 3, arrivalTime: 4, executionTime: 2, deadline: 8, numPages: 3 },
-    { id: 4, arrivalTime: 6, executionTime: 4, deadline: 10, numPages: 4 },
-    { id: 5, arrivalTime: 8, executionTime: 4, deadline: 5, numPages: 2 },
-  ];
+  // const processList : IProcess[]= [
+  //   { id: 1, arrivalTime: 0, executionTime: 10, deadline: 20, numPages: 4 },
+  //   { id: 2, arrivalTime: 2, executionTime: 3, deadline: 17, numPages: 2 },
+  //   { id: 3, arrivalTime: 4, executionTime: 2, deadline: 8, numPages: 3 },
+  //   { id: 4, arrivalTime: 6, executionTime: 4, deadline: 10, numPages: 4 },
+  //   { id: 5, arrivalTime: 8, executionTime: 4, deadline: 5, numPages: 2 },
+  // ];
 
   
- // const processList = Object.values(processes);
+ const processList = Object.values(processes);
+//  console.log(processList);
+
 
  useEffect(() => {
   if (processList.length > 0) {
@@ -50,10 +53,10 @@ const App: React.FC = () => {
     <div className="column">
       <img src={logo} alt="Logo" className="logo" />
       <InputsAndMethods conditions={conditions} setConditions={setConditions} />
-      <button onClick={handleClick}>macaco</button>
-      {/*<CreateProcesses processes={processes} setProcesses={setProcesses} />*/}
-      <FrontGanttChart processList={processList} conditions={conditions} schedule={schedule}  play={play} />
-      <MemoriesComponent processList={processList} conditions={conditions} schedule={schedule} play={play}/>
+      <CreateProcesses processes={processes} setProcesses={setProcesses} />
+      <button onClick={handleClick}>Run</button>
+      <FrontGanttChart processList={processList} conditions={conditions} schedule={schedule}  play={play} handleClick={handleClick} />
+      <MemoriesComponent processList={processList} conditions={conditions} schedule={schedule} play={play} />
     </div>
   );
 };

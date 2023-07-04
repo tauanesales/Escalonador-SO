@@ -34,7 +34,8 @@ const INITIAL_PROCESS: IProcess | any = {
 
 const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcesses }) => {
   const createProcess = (process: IProcess) => {
-    const id = generateId(processes);
+    // const id = generateId(processes);
+    const id = Object.values(processes).length + 1;
     const newProcesses = { ...processes };
     newProcesses[id] = { ...process, id };
     setProcesses(newProcesses);
