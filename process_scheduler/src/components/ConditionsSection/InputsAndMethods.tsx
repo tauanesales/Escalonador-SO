@@ -95,7 +95,7 @@ const InputsAndMethods = ({ conditions, setConditions }: InputsAndMethodsProps) 
         </div>
       </div>
     </form>
->>>>>>> origin/animation
+	</div>
   );
 };
 
