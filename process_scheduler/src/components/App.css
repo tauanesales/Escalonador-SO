@@ -1,6 +1,9 @@
 .logo {
-  width: 10%;
-  height: 100%;
+  display: block;
+  max-width: 10%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
 }
 
 .column {
