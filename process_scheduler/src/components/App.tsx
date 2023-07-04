@@ -33,7 +33,7 @@ const App: React.FC = () => {
 
   
  const processList = Object.values(processes);
-//  console.log(processList);
+ console.log(processList);
 
 
  useEffect(() => {
@@ -55,7 +55,7 @@ const App: React.FC = () => {
       <InputsAndMethods conditions={conditions} setConditions={setConditions} />
       <CreateProcesses processes={processes} setProcesses={setProcesses} />
       <button onClick={handleClick}>Run</button>
-      <FrontGanttChart processList={processList} conditions={conditions} schedule={schedule}  play={play} handleClick={handleClick} />
+      <FrontGanttChart processList={processList} conditions={conditions} schedule={schedule}  play={play} />
       <MemoriesComponent processList={processList} conditions={conditions} schedule={schedule} play={play} />
     </div>
   );
