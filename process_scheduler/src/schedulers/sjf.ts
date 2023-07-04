@@ -1,11 +1,11 @@
-import Process from "../interfaces/Process";
+import {IProcess} from "../interfaces/Process";
 import Scheduler from "../interfaces/Scheduler";
 
 export default class SJFScheduler implements Scheduler {
-  public schedule(processes: Process[]): number[] {
-    let _processes: Process[] = [...processes];
+  public schedule(processes: IProcess[]): number[] {
+    let _processes: IProcess[] = [...processes].map((process) => Object.assign({}, process));
     let schedule: number[] = [];
-    let currentProcess: Process;
+    let currentProcess: IProcess;
     let counter: number = 0;
     while (_processes.length !== 0) {
       const arrivedProcesses: number[] = _processes
@@ -17,6 +17,7 @@ export default class SJFScheduler implements Scheduler {
         arrivedProcesses
       );
       currentProcess = _processes[shortestProcessIndex];
+      // { ..._processes[shortestProcessIndex]};
 
       while (currentProcess.executionTime !== 0) {
         schedule[counter] = currentProcess.id;
@@ -31,7 +32,7 @@ export default class SJFScheduler implements Scheduler {
   }
 
   private getShortestProcess(
-    processes: Process[],
+    processes: IProcess[],
     arrivedProcesses: number[]
   ): number {
     let smallestExecutionTime: number = Infinity;

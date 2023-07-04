@@ -1,16 +1,16 @@
-import Process from "../interfaces/Process";
+import {IProcess} from "../interfaces/Process";
 import Scheduler from "../interfaces/Scheduler";
 import RotatingQueue from "../data/RotatingQueue";
 
 export default class RoundRobinScheduler implements Scheduler {
   public schedule(
-    processes: Process[],
+    processes: IProcess[],
     quantum: number = 2,
     overheadTime: number = 1
   ): number[] {
-    let _processes: Process[] = [...processes];
+    let _processes: IProcess[] = [...processes].map((obj) => Object.assign({}, obj) );
     let schedule: number[] = [];
-    let currentProcess: Process;
+    let currentProcess: IProcess;
     let counter: number = 0;
     let processIterations: number = 0;
     let processIndex: number = -1;
@@ -33,7 +33,7 @@ export default class RoundRobinScheduler implements Scheduler {
       currentProcess = _processes[processIndex];
 
       // quantum time execution
-      processIterations = Math.min(currentProcess.executionTime, quantum);
+      processIterations = Math.min(currentProcess?.executionTime, quantum);
       for (let i = 0; i < processIterations; i++) {
         schedule[counter] = currentProcess.id;
         currentProcess.executionTime -= 1;
@@ -58,7 +58,7 @@ export default class RoundRobinScheduler implements Scheduler {
     return schedule;
   }
 
-  private getProcessIndex(processId: number, processes: Process[]) {
+  private getProcessIndex(processId: number, processes: IProcess[]) {
     for (let i = 0; i < processes.length; i++) {
       if (processes[i].id == processId) {
         return i;

@@ -1,11 +1,11 @@
 import AbsPaging from "./AbsPaging";
-import Process from "../interfaces/Process";
+import {IProcess} from "../interfaces/Process";
 
 export default class FIFOPageReplacement extends AbsPaging {
   private firstInQueue: number[] = [];
 
   constructor(
-    processes: Process[],
+    processes: IProcess[],
     ramSize: number,
     pageSize: number,
     diskSize: number

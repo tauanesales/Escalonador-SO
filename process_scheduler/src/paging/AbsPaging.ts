@@ -1,4 +1,4 @@
-import Process from "../interfaces/Process";
+import {IProcess} from "../interfaces/Process";
 import Memory from "../data/Memory";
 import MemoryInterface from "../interfaces/IMemory";
 import PaginationData from "../interfaces/PaginationData";
@@ -11,7 +11,7 @@ export default abstract class AbsPaging implements PagingAlgorithm {
   protected pageNumMap: Map<number, number>;
 
   constructor(
-    processes: Process[],
+    processes: IProcess[],
     ramSize: number,
     pageSize: number,
     diskSize: number
@@ -25,7 +25,7 @@ export default abstract class AbsPaging implements PagingAlgorithm {
     //    load all processes pages on disk
     //    store the total number of pages of each process.
     //    intialize the page table
-    let process: Process;
+    let process: IProcess;
     for (let i = 0; i < processes.length; i++) {
       process = processes[i];
       this.disk.store(process.id, process.numPages);

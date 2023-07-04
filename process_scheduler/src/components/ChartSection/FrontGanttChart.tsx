@@ -7,45 +7,30 @@ import { IConditions } from "../../interfaces/Conditions";
 interface FrontGanttChartProps {
   processList: IProcess[];
   conditions: IConditions;
+  schedule: number[];
+  play: boolean;
 }
 
-const INITIAL_MATRIX = 10;
+const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processList, schedule, play }) => {
 
-const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ processList, conditions }) => {
   const [matrix, setMatrix] = useState<number[][]>([]);
   const [columns, setColumns] = useState<JSX.Element[]>([]);
-  const [sliderValue, setSliderValue] = useState(500);
+  const [turnaround, setTurnaround] = useState<number>();
 
-  // console.log(processList);
 
-  // processList = [
-  //   { id: "1", arrivalTime: 0, executionTime: 5, deadline: 20, numPages: 2 },
-  //   { id: "2", arrivalTime: 2, executionTime: 3, deadline: 17, numPages: 2 },
-  //   { id: "3", arrivalTime: 4, executionTime: 2, deadline: 8, numPages: 2 },
-  //   { id: "4", arrivalTime: 6, executionTime: 4, deadline: 10, numPages: 2 },
-  //   { id: "5", arrivalTime: 8, executionTime: 4, deadline: 5, numPages: 2 },
-  // ];
-
-  const schedule = [
-    1, 1, -1, 2, 2, -1, 3, 3, 5, 5, -1, 5, 5, 4, 4, -1, 4, 4, 2, 1, 1, -1, 1,
-  ];
-
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(event.target.value);
-    setSliderValue(value);
+  const handleClick= ()=>{
+   
+    console.log(conditions);
+    console.log(schedule);
+    console.log(processList);
   };
-  const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);
+  const handleReset= () =>{
+    setColumns([]);
   };
-  const handleStart = () => {
-    if (!processList.length) return;
-    renderColumn();
-  };
+
   function create_matrix() {
     const newmatrix: number[][] = [];
-    const last_index_list = schedule.map((currentElement, index) => {
+    const last_index_list = schedule.map((_currentElement, index) => {
       return schedule.lastIndexOf(index + 1);
     });
     let last_element = 0;
@@ -68,17 +53,8 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ processList, conditio
     setMatrix(newmatrix);
   }
 
-  useEffect(() => {
-    create_matrix();
-  }, []);
-
-  function handleReset() {
-    setColumns([]);
-  }
-
   function renderColumn() {
     const newColumns: JSX.Element[] = [];
-
     const hiddenBox = <ChartBox boxType="hidden-box" />;
     const switchBox = <ChartBox boxType="switch-box" />;
     const waitBox = <ChartBox boxType="wait-box" />;
@@ -89,7 +65,7 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ processList, conditio
     const renderAsync = async () => {
       for (let current_time = 0; current_time < matrix.length; current_time++) {
         const column = matrix[current_time].reduce(
-          (accumulator: JSX.Element, proc, process_index) => {
+          (accumulator: JSX.Element, proc, _process_index) => {
             switch (proc) {
               case -1:
                 return (
@@ -131,29 +107,37 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ processList, conditio
         );
         setColumns([...newColumns]);
 
-        await delay(sliderValue);
+        await delay(conditions.intervalo);
       }
-      setIsPlaying(false);
     };
 
     renderAsync();
   }
+  
+  function calculateTurnaround(){
+    setTurnaround(processList.reduce( (accumulator: number , process)=> {
+      console.log(schedule.lastIndexOf(process.id)+1, "-", process.arrivalTime) ;
+      return accumulator += (schedule.lastIndexOf(process.id)+1-process.arrivalTime);
+    }, 0)/processList.length)
+    
+  }
 
+  useEffect(() => {
+    console.log(schedule);
+    if (schedule.length > 0) {
+      calculateTurnaround();
+      create_matrix();
+    }
+  }, [schedule]);
+
+  useEffect( () => {
+    renderColumn();
+  }, [play])
   return (
     <div className="box chart">
-      <button onClick={handleStart}>Start</button>
-      <button onClick={handlePlayPause}>{isPlaying ? "Pause" : "Play"}</button>
-      <button onClick={handleReset}> reset</button>
-      <input
-        type="range"
-        min="125"
-        max="2000"
-        step="125"
-        value={sliderValue}
-        onChange={handleSliderChange}
-      />
-      <p>Slider Value: {sliderValue / 1000}</p>
-
+      <button onClick={handleReset}>Reset</button> <br/>
+      <button onClick={handleClick}>Logs</button>
+      <p>turnaround: {turnaround}</p>
       <br />
       <div className="chart__wrapper">{columns}</div>
     </div>

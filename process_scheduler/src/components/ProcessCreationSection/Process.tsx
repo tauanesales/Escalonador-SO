@@ -24,7 +24,7 @@ const Process: React.FC<ProcessProps> = memo((props) => {
     <div className="process__card">
       <header className="process__card__header">
         <h3 className="process__card__heading">
-          Cód.: <code>{process.id?.substring(0, 6).toUpperCase()}</code>
+          Cód.: <code>{process.id}</code>
         </h3>
         <button
           onClick={() => deleteProcess(process.id)}
