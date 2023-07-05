@@ -48,7 +48,7 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcess
     value: number | undefined
   ) => {
     if (!processId) return;
-    const newProcesses = { ...processes };
+    const newProcesses: any = { ...processes };
     newProcesses[processId] = {
       ...newProcesses[processId],
       [key]: value,
@@ -61,7 +61,7 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcess
     let tmpProcesses = { ...processes };
     delete tmpProcesses[processId];
 	let i = 1;
-	let newProcesses = { };
+	let newProcesses: { [key: number]: IProcess } = { };
 	Object.keys(tmpProcesses).forEach(key => {
 		tmpProcesses[key].id = i;
 		newProcesses[i] = tmpProcesses[key];
