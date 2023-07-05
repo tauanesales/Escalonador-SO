@@ -42,6 +42,7 @@ const Process: React.FC<ProcessProps> = memo((props) => {
             id={`executionTime-${process.id}`}
             name={"executionTime" as keyof IProcess}
             value={process.executionTime}
+            min="1"
           />
         </label>
         <label htmlFor="deadline">
@@ -52,6 +53,7 @@ const Process: React.FC<ProcessProps> = memo((props) => {
             id={`deadline-${process.id}`}
             name={"deadline" as keyof IProcess}
             value={process.deadline}
+            min="0"
           />
         </label>
         <label htmlFor="numPages">
@@ -62,6 +64,7 @@ const Process: React.FC<ProcessProps> = memo((props) => {
             id={`numPages-${process.id}`}
             name={"numPages" as keyof IProcess}
             value={process.numPages}
+            min="0"
           />
         </label>
         <label htmlFor="arrivalTime">
@@ -72,6 +75,7 @@ const Process: React.FC<ProcessProps> = memo((props) => {
             id={`arrivalTime-${process.id}`}
             name={"arrivalTime" as keyof IProcess}
             value={process.arrivalTime}
+            min="0"
           />
         </label>
       </form>
