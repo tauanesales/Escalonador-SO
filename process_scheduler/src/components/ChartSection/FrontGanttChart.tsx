@@ -13,8 +13,13 @@ interface FrontGanttChartProps {
   reset: boolean;
 }
 
-const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processList, schedule, play, reset }) => {
-
+const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
+  conditions,
+  processList,
+  schedule,
+  play,
+  reset,
+}) => {
   const [matrix, setMatrix] = useState<number[][]>([]);
   const [columns, setColumns] = useState<JSX.Element[]>([]);
   const [turnaround, setTurnaround] = useState<number>();
@@ -24,7 +29,7 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
     console.log(schedule);
     console.log(processList);
   };
-  
+
   function create_matrix() {
     const newmatrix: number[][] = [];
     const last_index_list = schedule
@@ -148,11 +153,11 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
   function calculateTurnaround() {
     setTurnaround(
       processList.reduce((accumulator: number, process) => {
-        console.log(
-          schedule.lastIndexOf(process.id) + 1,
-          "-",
-          process.arrivalTime
-        );
+        // console.log(
+        //   schedule.lastIndexOf(process.id) + 1,
+        //   "-",
+        //   process.arrivalTime
+        // );
         return (accumulator +=
           schedule.map((value) => Math.floor(value)).lastIndexOf(process.id) +
           1 -
@@ -162,7 +167,7 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
   }
 
   useEffect(() => {
-    console.log(schedule);
+    // console.log(schedule);
     if (schedule.length > 0) {
       calculateTurnaround();
       create_matrix();
@@ -171,11 +176,11 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
 
   useEffect(() => {
     renderColumn();
-  }, [play])
+  }, [play]);
 
   useEffect(() => {
     setColumns([]);
-  }, [reset])
+  }, [reset]);
 
   return (
     <div className="box chart">

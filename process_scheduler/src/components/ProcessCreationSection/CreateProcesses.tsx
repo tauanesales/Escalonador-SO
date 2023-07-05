@@ -32,11 +32,14 @@ const INITIAL_PROCESS: IProcess | any = {
   numPages: 0,
 };
 
-const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcesses }) => {
+const CreateProcesses: React.FC<CreateProcessesProps> = ({
+  processes,
+  setProcesses,
+}) => {
   const createProcess = (process: IProcess) => {
     // const id = generateId(processes);
     const id = Object.values(processes).length + 1;
-	// console.log(Object.values(processes));
+    // console.log(Object.values(processes));
     const newProcesses = { ...processes };
     newProcesses[id] = { ...process, id };
     setProcesses(newProcesses);
@@ -60,14 +63,14 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcess
     if (!processId) return;
     let tmpProcesses = { ...processes };
     delete tmpProcesses[processId];
-	let i = 1;
-	let newProcesses: { [key: number]: IProcess } = { };
-	Object.keys(tmpProcesses).forEach(key => {
-		tmpProcesses[key].id = i;
-		newProcesses[i] = tmpProcesses[key];
-		i++;
-	});
-	// console.log(Object.keys(newProcesses));
+    let i = 1;
+    let newProcesses: { [key: number]: IProcess } = {};
+    Object.keys(tmpProcesses).forEach((key) => {
+      tmpProcesses[key].id = i;
+      newProcesses[i] = tmpProcesses[key];
+      i++;
+    });
+    // console.log(Object.keys(newProcesses));
     setProcesses(newProcesses);
   };
 
@@ -75,7 +78,7 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcess
     <section className="create__process">
       <div className="create__process__heading"></div>
       <ol className="process__list">
-	    <li>
+        <li>
           <button
             onClick={() => createProcess(INITIAL_PROCESS)}
             className="create__process__button"

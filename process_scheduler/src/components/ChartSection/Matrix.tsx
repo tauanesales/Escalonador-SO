@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import "./Matrix.css";
 
 type MatrixProps = {
@@ -72,7 +72,9 @@ const Matrix: React.FC<MatrixProps> = ({ n, m, interval }) => {
           </React.Fragment>
         ))}
       </div>
-      <button onClick={handleRender}>{isRendering ? 'Stop Rendering' : 'Start Rendering'}</button>
+      <button onClick={handleRender}>
+        {isRendering ? "Stop Rendering" : "Start Rendering"}
+      </button>
       <button onClick={handleReset}>Reset Matrix</button>
     </div>
   );

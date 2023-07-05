@@ -9,24 +9,24 @@
 }
 
 .wait-box {
-  background-color: #FF0;
+  background-color: #ff0;
 }
 
 .processing-box {
-  background-color: #0F0;
+  background-color: #0f0;
 }
 
 .switch-box {
-  background-color: #FF0000;
+  background-color: #ff0000;
 }
 
 .hidden-box {
   /* background-color: transparent; */
   /* background-color: var(--chart-background-color); */
-  background-color: #DDD;
+  background-color: #ddd;
 }
 
 .overhead-box {
   background-color: #000;
-  border: 3px double #0F0;
+  border: 3px double #0f0;
 }
