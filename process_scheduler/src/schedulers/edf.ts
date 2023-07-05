@@ -62,33 +62,36 @@ export default class EDFScheduler implements Scheduler {
     return schedule;
   }
 
+  // Algoritmo que é basicamente um Math.min para lista de processos+deadline
   private getEarliestDeadlineProcess(
     processes: IProcess[],
     arrivedProcesses: number[]
   ): number {
-    let earliestDeadline: number = arrivedProcesses.reduce(
-      (minIndex, index) => {
-        return (processes[minIndex].deadline as number) <
-          (processes[index].deadline as number)
-          ? minIndex
-          : index;
-      },
-      0
-    );
-    return earliestDeadline;
+    // Errado
+    // let earliestDeadline: number = arrivedProcesses.reduce(
+    //   (minIndex, index) => {
+    //     return (processes[minIndex].deadline as number) <
+    //       (processes[index].deadline as number)
+    //       ? minIndex
+    //       : index;
+    //   },
+    //   0
+    // );
+    // return earliestDeadline;
 
-    // let earliestDeadline: number = Infinity;
-    // let earliestDeadlineIndex: number = -1;
+    // Correto
+    let earliestDeadline: number = Infinity;
+    let earliestDeadlineIndex: number = -1;
 
-    // for (let i = 0; i < arrivedProcesses.length; i++) {
-    //   let process: IProcess = processes[arrivedProcesses[i]];
-    //   let deadline: number = (process.deadline as number) + process.arrivalTime;
-    //   if (deadline < earliestDeadline) {
-    //     earliestDeadline = deadline;
-    //     earliestDeadlineIndex = arrivedProcesses[i];
-    //   }
-    // }
+    for (let i = 0; i < arrivedProcesses.length; i++) {
+      let process: IProcess = processes[arrivedProcesses[i]];
+      let deadline: number = (process.deadline as number) + process.arrivalTime;
+      if (deadline < earliestDeadline) {
+        earliestDeadline = deadline;
+        earliestDeadlineIndex = arrivedProcesses[i];
+      }
+    }
 
-    // return earliestDeadlineIndex;
+    return earliestDeadlineIndex;
   }
 }
