@@ -1,7 +1,11 @@
 .process__card {
+  display: flex;
+  flex-direction: row;
   background-color: #14114e;
   padding: 1rem;
-  border-radius: 0.25rem;
+  border-radius: 1rem;
+  gap: 1rem;
+  box-shadow: 0px 0px 3px black;
 }
 
 .process__list {
@@ -17,18 +21,17 @@
   color: #fff;
 }
 
-.process__card form {
-  margin-top: 2rem;
+.process__card__fields {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .5rem;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .process__card label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 1rem;
+  width: 100%;
 }
 .process__card label > p {
   color: white;
@@ -37,7 +40,7 @@
 .process__card input {
   font-size: 1rem;
   width: 100%;
-  padding: 1rem;
+  padding: 0.4rem;
   color: #fff;
   border: none;
   border-radius: 0.25rem;
@@ -51,14 +54,15 @@
 
 .process__card__header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column-reverse;
   justify-content: space-between;
 }
 
 .process__card__close {
   font-size: 1.25rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 0.25rem;
-  background-color: #0d0b34;
-  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5rem;
+  background-color: #ff7e7e;
+  color: #ff7e7e;
 }

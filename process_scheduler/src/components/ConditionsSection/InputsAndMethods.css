@@ -1,10 +1,41 @@
 .methods,
 .methods__bottom {
-  padding: 1rem;
-  background-color: #0d0b34;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  /*padding: 0rem;*/
   border-radius: 0.25rem;
+  gap: 1rem;
 }
+
+.methods__bottom {
+	width: 40%;
+}
+
+.methods__form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  
+  width: 100%;
+}
+
+.methods__form__wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 2rem;
+	width: 100%;
+	padding-left: 2.5%;
+	padding-right: 2.5%;
+}
+
 .methods__heading,
+.methods__pagination__title,
 .methods__bottom_field,
 .methods__bottom_field > input::placeholder {
   font-size: 1rem;
@@ -13,15 +44,20 @@
 }
 
 .methods__heading,
+.methods__pagination__title,
 .methods__bottom_field > p {
   filter: opacity(0.7);
+  color: #291e67;
 }
 
 .methods__options {
-  margin-top: 1rem;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
   gap: 1rem;
+  height: 50%;
 }
 
 .methods__button,
@@ -31,10 +67,17 @@
   text-transform: uppercase;
   font-weight: 700;
   color: #fff;
+  width: 4vw;
   background-color: #14114e;
-  padding-inline: 1rem;
-  padding-block: 0.5rem;
-  border-radius: 0.25rem;
+  padding-block: 0.2rem;
+  border-radius: 5rem;
+}
+
+.methods__pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
 }
 
 .methods__button:hover,
@@ -55,34 +98,31 @@ label[for*="pagination"]:hover {
 .methods__pagination__options {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  flex-direction: column;
+  gap: .75rem;
 }
-
-.methods__pagination__options,
-.methods__bottom {
-  gap: 1rem;
-  margin-top: 1rem;
-}
+  /*gap: 2rem;*/
 
 .methods__bottom_field {
-  flex-grow: 1;
+  width: 8vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1rem;
+  gap: .25rem;
 }
 
 .methods__bottom_field input {
-  min-width: 200px;
+  min-width: 4rem;
   border-radius: 0.25rem;
   font-size: 1rem;
-  margin-top: 1rem;
-  padding: 1rem;
-  width: 100%;
+  /*margin-top: 1rem;*/
+  padding: .25rem;
+  width: 30%;
   background-color: #14114e;
   border: none;
   color: #fff;
-}
-
-.methods__pagination {
-  color: #fff;
-  margin-top: 2rem;
 }
 
 .methods__pagination__title {
@@ -91,5 +131,7 @@ label[for*="pagination"]:hover {
 
 .methods__pagination__options menu {
   display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   gap: 1rem;
 }

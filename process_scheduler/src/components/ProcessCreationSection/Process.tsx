@@ -56,6 +56,8 @@ const Process: React.FC<ProcessProps> = memo((props) => {
             min="0"
           />
         </label>
+	  </form>
+	  <form onSubmit={(e) => e.preventDefault()} className="process__card__fields">
         <label htmlFor="numPages">
           <p>Páginas:</p>
           <input

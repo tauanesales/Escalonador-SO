@@ -36,6 +36,7 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcess
   const createProcess = (process: IProcess) => {
     // const id = generateId(processes);
     const id = Object.values(processes).length + 1;
+	// console.log(Object.values(processes));
     const newProcesses = { ...processes };
     newProcesses[id] = { ...process, id };
     setProcesses(newProcesses);
@@ -57,15 +58,31 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcess
 
   const deleteProcess = (processId: string | undefined) => {
     if (!processId) return;
-    const newProcesses = { ...processes };
-    delete newProcesses[processId];
+    let tmpProcesses = { ...processes };
+    delete tmpProcesses[processId];
+	let i = 1;
+	let newProcesses = { };
+	Object.keys(tmpProcesses).forEach(key => {
+		tmpProcesses[key].id = i;
+		newProcesses[i] = tmpProcesses[key];
+		i++;
+	});
+	// console.log(Object.keys(newProcesses));
     setProcesses(newProcesses);
   };
 
   return (
     <section className="create__process">
-      <h2 className="create__process__heading">Processos: </h2>
+      <div className="create__process__heading"></div>
       <ol className="process__list">
+	    <li>
+          <button
+            onClick={() => createProcess(INITIAL_PROCESS)}
+            className="create__process__button"
+          >
+            Criar processo
+          </button>
+        </li>
         {Object.values(processes).map((process) => (
           <li key={process.id}>
             <Process
@@ -75,17 +92,8 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({ processes, setProcess
             />
           </li>
         ))}
-        <li>
-          <button
-            onClick={() => createProcess(INITIAL_PROCESS)}
-            className="create__process__button"
-          >
-            Criar processo
-          </button>
-        </li>
       </ol>
     </section>
   );
 };
-
 export default CreateProcesses;
