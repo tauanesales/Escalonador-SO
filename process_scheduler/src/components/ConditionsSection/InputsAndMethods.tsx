@@ -10,14 +10,16 @@ interface InputsAndMethodsProps {
 const methodOptions: IConditions["method"][] = ["EDF", "FIFO", "RR", "SJF"];
 const paginationOptions: IConditions["pagination"][] = ["fifo", "lru"];
 
-const   InputsAndMethods = ({ conditions, setConditions }: InputsAndMethodsProps) => {
-
+const InputsAndMethods = ({
+  conditions,
+  setConditions,
+}: InputsAndMethodsProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setConditions({ ...conditions, [id]: value ? parseInt(value) : "" });
   };
 
-  useState
+  useState;
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
@@ -46,17 +48,20 @@ const   InputsAndMethods = ({ conditions, setConditions }: InputsAndMethodsProps
               onChange={handleChange}
               type="number"
               id="quantum"
-              placeholder= "0"
+              name="quantum"
+              min="1"
               value={conditions.quantum}
             />
           </label>
           <label htmlFor="overload" className="methods__bottom_field">
             <p>Sobrecarga: </p>
-            <input onChange={handleChange}
-            type="number" 
-            id="sobrecarga" 
-            placeholder="0" 
-            value={conditions.sobrecarga} />
+            <input
+              onChange={handleChange}
+              type="number"
+              id="sobrecarga"
+              min="0"
+              value={conditions.sobrecarga}
+            />
           </label>
         </div>
 
@@ -69,7 +74,9 @@ const   InputsAndMethods = ({ conditions, setConditions }: InputsAndMethodsProps
                   <button
                     onClick={() => setConditions({ ...conditions, pagination })}
                     className="methods__pagination__button"
-                    aria-selected={conditions.pagination === pagination || undefined}
+                    aria-selected={
+                      conditions.pagination === pagination || undefined
+                    }
                   >
                     {pagination}
                   </button>
@@ -77,15 +84,15 @@ const   InputsAndMethods = ({ conditions, setConditions }: InputsAndMethodsProps
               ))}
             </menu>
             <input
-                id="intervalo"
-                type="range"
-                min="125"
-                max="2000"
-                step="125"
-                value={conditions.intervalo}
-                onChange={handleChange}
-             />
-             {conditions.intervalo/1000} segundos
+              id="intervalo"
+              type="range"
+              min="125"
+              max="2000"
+              step="125"
+              value={conditions.intervalo}
+              onChange={handleChange}
+            />
+            {conditions.intervalo / 1000} segundos
           </div>
         </fieldset>
       </div>

@@ -28,7 +28,7 @@ interface ProcessData {
 const INITIAL_PROCESS: IProcess | any = {
   arrivalTime: 0,
   deadline: 0,
-  executionTime: 0,
+  executionTime: 1,
   numPages: 0,
 };
 
