@@ -138,6 +138,9 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
 
         newColumns.push(
           <div key={current_time} className="chart__column">
+            <div key={current_time} className="chart__wrapper">
+              {current_time}
+            </div>
             {column}
           </div>
         );

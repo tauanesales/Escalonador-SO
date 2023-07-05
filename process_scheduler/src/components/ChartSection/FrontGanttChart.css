@@ -12,6 +12,7 @@
 
 .chart__wrapper {
   display: flex;
+  margin: auto;
   rotate: x 180deg;
   gap: 0.25rem;
 }
