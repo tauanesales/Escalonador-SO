@@ -1,6 +1,6 @@
 import React from "react";
 import "./CreateProcesses.css";
-import { generateId } from "../../helper/generateId";
+// import { generateId } from "../../helper/generateId";
 import { IProcess } from "../../interfaces/Process";
 import Process from "./Process";
 

@@ -91,13 +91,4 @@ export default class EDFScheduler implements Scheduler {
 
     // return earliestDeadlineIndex;
   }
-
-  private overHeadNumber(num: number): number {
-    let str: string = num.toString();
-
-    let power: number = Math.pow(10, str.length);
-
-    let result: number = num / power;
-    return result;
-  }
 }
