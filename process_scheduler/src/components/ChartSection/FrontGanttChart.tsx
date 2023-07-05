@@ -3,6 +3,7 @@ import "./FrontGanttChart.css";
 import { IProcess } from "../../interfaces/Process";
 import ChartBox from "./ChartBox";
 import { IConditions } from "../../interfaces/Conditions";
+import ChartBoxEnum from "./ChartBoxEnum";
 
 interface FrontGanttChartProps {
   processList: IProcess[];
@@ -11,20 +12,22 @@ interface FrontGanttChartProps {
   play: boolean;
 }
 
-const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processList, schedule, play }) => {
-
+const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
+  conditions,
+  processList,
+  schedule,
+  play,
+}) => {
   const [matrix, setMatrix] = useState<number[][]>([]);
   const [columns, setColumns] = useState<JSX.Element[]>([]);
   const [turnaround, setTurnaround] = useState<number>();
 
-
-  const handleClick= ()=>{
-   
+  const handleClick = () => {
     console.log(conditions);
     console.log(schedule);
     console.log(processList);
   };
-  const handleReset= () =>{
+  const handleReset = () => {
     setColumns([]);
   };
 
@@ -34,15 +37,23 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
       return schedule.lastIndexOf(index + 1);
     });
     let last_element = 0;
-    // -1 = switching ,0 = hidden, 1 = waiting, 2 = processing,
+    // ChartBoxEnum.Switch = switching ,0 = hidden, 1 = waiting, 2 = processing,
     for (let i = 0; i < schedule.length; i++) {
       newmatrix[i] = [];
       for (let j = 0; j < processList.length; j++) {
-        if (schedule[i] == j + 1) {
+        if (
+          !Number.isInteger(schedule[i]) &&
+          Math.floor(schedule[i]) == j + 1
+        ) {
+          newmatrix[i][j] = ChartBoxEnum.OverHead;
+        } else if (schedule[i] == j + 1) {
           newmatrix[i][j] = 2;
           last_element = schedule[i];
-        } else if (schedule[i] == -1 && j == last_element - 1) {
-          newmatrix[i][j] = -1;
+        } else if (
+          schedule[i] == ChartBoxEnum.Switch &&
+          j == last_element - 1
+        ) {
+          newmatrix[i][j] = ChartBoxEnum.Switch;
         } else if (i >= processList[j].arrivalTime && i <= last_index_list[j]) {
           newmatrix[i][j] = 1;
         } else {
@@ -56,18 +67,27 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
   function renderColumn() {
     const newColumns: JSX.Element[] = [];
     const hiddenBox = <ChartBox boxType="hidden-box" />;
+    const overheadBox = <ChartBox boxType="overhead-box" />;
     const switchBox = <ChartBox boxType="switch-box" />;
     const waitBox = <ChartBox boxType="wait-box" />;
     const processingBox = <ChartBox boxType="processing-box" />;
 
-    const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+    const delay = (ms: number) =>
+      new Promise<void>((resolve) => setTimeout(resolve, ms));
 
     const renderAsync = async () => {
       for (let current_time = 0; current_time < matrix.length; current_time++) {
         const column = matrix[current_time].reduce(
           (accumulator: JSX.Element, proc, _process_index) => {
             switch (proc) {
-              case -1:
+              case ChartBoxEnum.OverHead:
+                return (
+                  <>
+                    {accumulator}
+                    {overheadBox}
+                  </>
+                );
+              case ChartBoxEnum.Switch:
                 return (
                   <>
                     {accumulator}
@@ -113,13 +133,19 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
 
     renderAsync();
   }
-  
-  function calculateTurnaround(){
-    setTurnaround(processList.reduce( (accumulator: number , process)=> {
-      console.log(schedule.lastIndexOf(process.id)+1, "-", process.arrivalTime) ;
-      return accumulator += (schedule.lastIndexOf(process.id)+1-process.arrivalTime);
-    }, 0)/processList.length)
-    
+
+  function calculateTurnaround() {
+    setTurnaround(
+      processList.reduce((accumulator: number, process) => {
+        console.log(
+          schedule.lastIndexOf(process.id) + 1,
+          "-",
+          process.arrivalTime
+        );
+        return (accumulator +=
+          schedule.lastIndexOf(process.id) + 1 - process.arrivalTime);
+      }, 0) / processList.length
+    );
   }
 
   useEffect(() => {
@@ -130,12 +156,12 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
     }
   }, [schedule]);
 
-  useEffect( () => {
+  useEffect(() => {
     renderColumn();
-  }, [play])
+  }, [play]);
   return (
     <div className="box chart">
-      <button onClick={handleReset}>Reset</button> <br/>
+      <button onClick={handleReset}>Reset</button> <br />
       <button onClick={handleClick}>Logs</button>
       <p>turnaround: {turnaround}</p>
       <br />

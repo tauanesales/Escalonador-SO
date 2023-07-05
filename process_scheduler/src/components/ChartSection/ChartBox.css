@@ -25,3 +25,7 @@
   /* background-color: var(--chart-background-color); */
   background-color: var(--empty-color);
 }
+
+.overhead-box {
+  background-color: darkgreen;
+}

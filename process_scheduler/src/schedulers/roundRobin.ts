@@ -1,6 +1,7 @@
-import {IProcess} from "../interfaces/Process";
+import { IProcess } from "../interfaces/Process";
 import Scheduler from "../interfaces/Scheduler";
 import RotatingQueue from "../data/RotatingQueue";
+import ChartBoxEnum from "../components/ChartSection/ChartBoxEnum";
 
 export default class RoundRobinScheduler implements Scheduler {
   public schedule(
@@ -8,10 +9,12 @@ export default class RoundRobinScheduler implements Scheduler {
     quantum: number = 2,
     overheadTime: number = 1
   ): number[] {
-    let _processes: IProcess[] = [...processes].map((obj) => Object.assign({}, obj) );
+    let _processes: IProcess[] = [...processes].map((obj) =>
+      Object.assign({}, obj)
+    );
     let schedule: number[] = [];
     let currentProcess: IProcess;
-    let counter: number = 0;
+    let currentMomentOfExecution: number = 0;
     let processIterations: number = 0;
     let processIndex: number = -1;
     let lastProcessEnded: boolean = false;
@@ -20,8 +23,14 @@ export default class RoundRobinScheduler implements Scheduler {
 
     while (_processes.length !== 0) {
       const arrivedProcesses = _processes
-        .filter((process) => process.arrivalTime <= counter)
+        .filter((process) => process.arrivalTime <= currentMomentOfExecution)
         .map((process) => process.id);
+
+      if (arrivedProcesses.length === 0) {
+        schedule[currentMomentOfExecution] = ChartBoxEnum.Empty;
+        currentMomentOfExecution++;
+        continue;
+      }
 
       queue.addElements(arrivedProcesses);
 
@@ -35,16 +44,16 @@ export default class RoundRobinScheduler implements Scheduler {
       // quantum time execution
       processIterations = Math.min(currentProcess?.executionTime, quantum);
       for (let i = 0; i < processIterations; i++) {
-        schedule[counter] = currentProcess.id;
+        schedule[currentMomentOfExecution] = currentProcess.id;
         currentProcess.executionTime -= 1;
-        counter++;
+        currentMomentOfExecution++;
       }
 
       if (currentProcess.executionTime !== 0) {
         //overhead
         for (let i = 0; i < overheadTime; i++) {
-          schedule[counter] = -1;
-          counter++;
+          schedule[currentMomentOfExecution] = -1;
+          currentMomentOfExecution++;
         }
 
         lastProcessEnded = false;
