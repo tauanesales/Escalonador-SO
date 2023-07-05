@@ -1,4 +1,4 @@
-import {IProcess} from "../interfaces/Process";
+import { IProcess } from "../interfaces/Process";
 import Memory from "../data/Memory";
 import MemoryInterface from "../interfaces/IMemory";
 import PaginationData from "../interfaces/PaginationData";

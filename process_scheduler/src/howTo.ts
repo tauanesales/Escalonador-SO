@@ -1,7 +1,7 @@
 import { SchedulerFactory, SchedulerType } from "./schedulers";
 //import FIFOPageReplacement from "./paging/fifo";
 import LRUPageReplacement from "./paging/lru";
-import {IProcess} from "./interfaces/Process";
+import { IProcess } from "./interfaces/Process";
 import PagingAlgorithm from "./interfaces/PagingAlgorithm";
 import Scheduler from "./interfaces/Scheduler";
 
