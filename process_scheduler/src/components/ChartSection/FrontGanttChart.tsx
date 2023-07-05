@@ -9,9 +9,10 @@ interface FrontGanttChartProps {
   conditions: IConditions;
   schedule: number[];
   play: boolean;
+  reset: boolean;
 }
 
-const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processList, schedule, play }) => {
+const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processList, schedule, play, reset }) => {
 
   const [matrix, setMatrix] = useState<number[][]>([]);
   const [columns, setColumns] = useState<JSX.Element[]>([]);
@@ -24,10 +25,7 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
     console.log(schedule);
     console.log(processList);
   };
-  const handleReset= () =>{
-    setColumns([]);
-  };
-
+  
   function create_matrix() {
     const newmatrix: number[][] = [];
     const last_index_list = schedule.map((_currentElement, index) => {
@@ -133,9 +131,13 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({ conditions, processLi
   useEffect( () => {
     renderColumn();
   }, [play])
+
+  useEffect(() => {
+    setColumns([]);
+  }, [reset])
+
   return (
     <div className="box chart">
-      <button onClick={handleReset}>Reset</button> <br/>
       <button onClick={handleClick}>Logs</button>
       <p>turnaround: {turnaround}</p>
       <br />

@@ -22,6 +22,7 @@ const App: React.FC = () => {
   const [conditions, setConditions] = useState<IConditions>(INITIAL_CONDITIONS);
   const [schedule, setSchedule] = useState<number[]>([]);
   const [save, setSave] = useState<boolean>(true);
+  const [reset, setReset] = useState<boolean>(true);
   const [play, setPlay] = useState<boolean>(true);
   // const processList : IProcess[]= [
   //   { id: 1, arrivalTime: 0, executionTime: 10, deadline: 20, numPages: 4 },
@@ -33,14 +34,15 @@ const App: React.FC = () => {
 
   
  const processList = Object.values(processes);
-//  console.log(processList);
 
 
  useEffect(() => {
+
   if (processList.length > 0) {
     const schedulerType: string = conditions.method;
     const createdScheduler: Scheduler = SchedulerFactory.createScheduler(schedulerType as SchedulerType);
     const createdSchedule = createdScheduler.schedule(processList, conditions.quantum, conditions.sobrecarga);
+
     setSchedule(createdSchedule);
     console.log("CreatedSchedule", createdSchedule);
     setTimeout(() => {
@@ -48,21 +50,28 @@ const App: React.FC = () => {
    }, 500);
   }
 }, [save]);
-  function handleClick(){
-    console.log(schedule);
-    
+
+  function handleRun(){
     setSave(!save);
+    console.log(schedule);
   }
+  function handleReset(){
+    setReset(!reset);
+  }
+
+
   return (
     <div className="column main__window">
 	  <div className="main__header">
         <InputsAndMethods conditions={conditions} setConditions={setConditions} />
         <CreateProcesses processes={processes} setProcesses={setProcesses} />
 	  </div>
-      <button onClick={handleClick}>Run</button>
-      <FrontGanttChart processList={processList} conditions={conditions} schedule={schedule}  play={play} />
-      <MemoriesComponent processList={processList} conditions={conditions} schedule={schedule} play={play} />
+      <button onClick={handleRun}>Run</button><br/>
+      <button onClick={handleReset}>Reset</button>
+      <FrontGanttChart processList={processList} conditions={conditions} schedule={schedule}  play={play} reset={reset}/>
+      <MemoriesComponent processList={processList} conditions={conditions} schedule={schedule} play={play} reset={reset}/>
     </div>
+
   );
 };
 

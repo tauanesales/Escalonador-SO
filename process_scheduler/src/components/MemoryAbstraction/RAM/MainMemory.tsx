@@ -5,9 +5,10 @@ import PaginationData from "../../../interfaces/PaginationData";
 interface MainMemoryProps{
   pagingData: PaginationData[],
   intervalo: number,
-  play : boolean
+  play : boolean,
+  reset: boolean
 }
-const MainMemory: React.FC<MainMemoryProps> = ({pagingData, intervalo, play})=> {
+const MainMemory: React.FC<MainMemoryProps> = ({pagingData, intervalo, play, reset})=> {
 
   // const pagingData = [
   //   { step: 0, ram: [242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN, 242, 1, 1, 1, NaN], disco: [9, 9, 9, 9] },
@@ -18,7 +19,18 @@ const MainMemory: React.FC<MainMemoryProps> = ({pagingData, intervalo, play})=> 
   const [matrix, setMatrix] = useState<({ value: number | string, address: number } | string | number)[][]>(
     Array.from({ length: 5 }, () => Array(10).fill("-"))
   );
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
+  
+  useEffect(() => {
+    const newMatrix = matrix.map((row) => [...row]);
+    for (let i = 0; i < 50; i++) {
+      const colIndex = i % 10;
+      const rowIndex = Math.floor(i / 10);
+      newMatrix[rowIndex][colIndex] = "-";
+    }
+    setMatrix(newMatrix);
+    setCurrentStep(1);
+  }, [reset])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,7 +63,7 @@ const MainMemory: React.FC<MainMemoryProps> = ({pagingData, intervalo, play})=> 
     return () => {
       clearInterval(interval);
     };
-  }, [ matrix, play]);
+  }, [ currentStep, matrix, play]);
 
   return (
     <div className="matrix-container">

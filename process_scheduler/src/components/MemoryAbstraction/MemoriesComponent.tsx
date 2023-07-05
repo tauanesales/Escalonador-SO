@@ -14,9 +14,10 @@ interface MemoriesComponentProps {
   conditions: IConditions;
   schedule: number[];
   play: boolean;
+  reset: boolean;
 }
 
-const MemoriesComponent: React.FC<MemoriesComponentProps>= ({ conditions, processList, schedule, play }) => {
+const MemoriesComponent: React.FC<MemoriesComponentProps>= ({ conditions, processList, schedule, play, reset }) => {
 
   const [pagingData,setPagingData ] = useState<PaginationData[]>([]);
   
@@ -44,20 +45,25 @@ const MemoriesComponent: React.FC<MemoriesComponentProps>= ({ conditions, proces
       setPagingData(lruPaging.run(schedule))
 
     }
-        console.log(pagingData);
+    console.log("meme");
+   
 
-  }, [conditions.pagination])
+  }, [schedule])
   
+  function handleClick(){
+
+    console.log(pagingData);
+  }
 
   return (
     <div className="memory-container">
       <div className="disk-container">
-        <DiskMemory  pagingData={pagingData} intervalo={conditions.intervalo} play={play}/>
+        <DiskMemory  pagingData={pagingData} intervalo={conditions.intervalo} play={play} reset={reset}/>
       </div>
       <div className="ram-container">
-        <MainMemory  pagingData={pagingData} intervalo={conditions.intervalo} play={play}/>
+        <MainMemory  pagingData={pagingData} intervalo={conditions.intervalo} play={play} reset={reset}/>
       </div>
-      
+      <button onClick={handleClick}>sirí</button>
     </div>
   );
 }

@@ -5,19 +5,28 @@ import PaginationData from "../../../interfaces/PaginationData";
 interface DiskProps{
   pagingData: PaginationData[],
   intervalo: number,
-  play : boolean
+  play : boolean,
+  reset: boolean
 }
-const DiskMemory: React.FC<DiskProps> = ({pagingData, intervalo, play})=> {
-  // const pagingData = [
-  //   { step: 0, ram: [2, 2, 1, 1, 3], disco: [9, 9, 9, 9] },
-  //   { step: 1, ram: [2, 2, 1, 1, 3], disco: [8, 8, 8, 8] },
-  //   { step: 2, ram: [2, 2, 1, 1, 3], disco: [7, 7, 7, 7] }
-  // ];
+const DiskMemory: React.FC<DiskProps> = ({pagingData, intervalo, play, reset})=> {
+
 
   const [matrix, setMatrix] = useState<({ value: number | string, address: number } | string | number)[][]>(
     Array.from({ length: 10 }, () => Array(12).fill("-"))
   );
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
+    
+    useEffect(() => {
+      const newMatrix = matrix.map((row) => [...row]);
+      for (let i = 0; i < 120; i++) {
+        const colIndex = i % 12;
+        const rowIndex = Math.floor(i / 12);
+        newMatrix[rowIndex][colIndex] = "-";
+      }
+      setMatrix(newMatrix);
+      
+    }, [reset]);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,6 +60,7 @@ const DiskMemory: React.FC<DiskProps> = ({pagingData, intervalo, play})=> {
       clearInterval(interval);
     };
   }, [currentStep, matrix, play]);
+
 
   return (
     <div className="matrix-container-disk">
