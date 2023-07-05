@@ -33,31 +33,48 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
 
   function create_matrix() {
     const newmatrix: number[][] = [];
-    const last_index_list = schedule.map((_currentElement, index) => {
-      return schedule.lastIndexOf(index + 1);
-    });
+    const last_index_list = schedule
+      .map((element) => {
+        return Math.floor(element);
+      })
+      .filter((value, index, self) => {
+        return value >= 0 && self.indexOf(value) === index;
+      })
+      .sort((a, b) => a - b)
+      .map((element) => {
+        return schedule
+          .map((element) => {
+            return Math.floor(element);
+          })
+          .lastIndexOf(element);
+      });
+
     let last_element = 0;
     // ChartBoxEnum.Switch = switching ,0 = hidden, 1 = waiting, 2 = processing,
-    for (let i = 0; i < schedule.length; i++) {
-      newmatrix[i] = [];
-      for (let j = 0; j < processList.length; j++) {
+    for (let column = 0; column < schedule.length; column++) {
+      newmatrix[column] = [];
+      for (let row = 0; row < processList.length; row++) {
         if (
-          !Number.isInteger(schedule[i]) &&
-          Math.floor(schedule[i]) == j + 1
+          !Number.isInteger(schedule[column]) &&
+          Math.floor(schedule[column]) == row + 1
         ) {
-          newmatrix[i][j] = ChartBoxEnum.OverHead;
-        } else if (schedule[i] == j + 1) {
-          newmatrix[i][j] = 2;
-          last_element = schedule[i];
+          newmatrix[column][row] = ChartBoxEnum.OverHead;
+          last_element = schedule[column];
+        } else if (schedule[column] == row + 1) {
+          newmatrix[column][row] = ChartBoxEnum.Processing;
+          last_element = schedule[column];
         } else if (
-          schedule[i] == ChartBoxEnum.Switch &&
-          j == last_element - 1
+          schedule[column] == ChartBoxEnum.Switch &&
+          row == Math.floor(last_element) - 1
         ) {
-          newmatrix[i][j] = ChartBoxEnum.Switch;
-        } else if (i >= processList[j].arrivalTime && i <= last_index_list[j]) {
-          newmatrix[i][j] = 1;
+          newmatrix[column][row] = ChartBoxEnum.Switch;
+        } else if (
+          column >= processList[row].arrivalTime &&
+          column <= last_index_list[row]
+        ) {
+          newmatrix[column][row] = ChartBoxEnum.Wait;
         } else {
-          newmatrix[i][j] = 0;
+          newmatrix[column][row] = ChartBoxEnum.Empty;
         }
       }
     }
@@ -94,14 +111,14 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
                     {switchBox}
                   </>
                 );
-              case 0:
+              case ChartBoxEnum.Empty:
                 return (
                   <>
                     {accumulator}
                     {hiddenBox}
                   </>
                 );
-              case 1:
+              case ChartBoxEnum.Wait:
                 return (
                   <>
                     {accumulator}
@@ -143,7 +160,9 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
           process.arrivalTime
         );
         return (accumulator +=
-          schedule.lastIndexOf(process.id) + 1 - process.arrivalTime);
+          schedule.map((value) => Math.floor(value)).lastIndexOf(process.id) +
+          1 -
+          process.arrivalTime);
       }, 0) / processList.length
     );
   }
