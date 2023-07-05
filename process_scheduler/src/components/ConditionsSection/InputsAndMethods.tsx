@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IConditions } from "../../interfaces/Conditions";
 import "./InputsAndMethods.css";
+import logo from "../../assets/img/logo.png";
+import logoIC from "../../assets/img/logoICvert_azulUFBA.png";
 
 interface InputsAndMethodsProps {
   conditions: IConditions;
@@ -10,10 +12,8 @@ interface InputsAndMethodsProps {
 const methodOptions: IConditions["method"][] = ["EDF", "FIFO", "RR", "SJF"];
 const paginationOptions: IConditions["pagination"][] = ["fifo", "lru"];
 
-const InputsAndMethods = ({
-  conditions,
-  setConditions,
-}: InputsAndMethodsProps) => {
+const InputsAndMethods = ({ conditions, setConditions }: InputsAndMethodsProps) => {
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setConditions({ ...conditions, [id]: value ? parseInt(value) : "" });
@@ -22,7 +22,10 @@ const InputsAndMethods = ({
   useState;
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <div className="methods__form__wrapper">
+	<img src={logo} alt="Logo" className="logo" />
+	<img src={logoIC} alt="LogoIC" className="logo" />
+    <form className="methods__form" onSubmit={(e) => e.preventDefault()}>
       <div className="methods">
         <h2 className="methods__heading">Selecione o método:</h2>
         <menu className="methods__options">
@@ -65,8 +68,8 @@ const InputsAndMethods = ({
           </label>
         </div>
 
-        <fieldset className="methods__pagination">
-          <legend className="methods__pagination__title">Paginação: </legend>
+        <div className="methods__pagination">
+          <h2 className="methods__pagination__title">Paginação: </h2>
           <div className="methods__pagination__options">
             <menu>
               {paginationOptions.map((pagination) => (
@@ -94,9 +97,10 @@ const InputsAndMethods = ({
             />
             {conditions.intervalo / 1000} segundos
           </div>
-        </fieldset>
+        </div>
       </div>
     </form>
+	</div>
   );
 };
 

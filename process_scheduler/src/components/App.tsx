@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import logo from "../assets/img/logo.png";
 import InputsAndMethods from "./ConditionsSection/InputsAndMethods";
 import FrontGanttChart from "./ChartSection/FrontGanttChart";
 import MemoriesComponent from "./MemoryAbstraction/MemoriesComponent";
@@ -22,7 +21,8 @@ const App: React.FC = () => {
  const [processes, setProcesses] = useState<{ [key: string]: IProcess }>({});
   const [conditions, setConditions] = useState<IConditions>(INITIAL_CONDITIONS);
   const [schedule, setSchedule] = useState<number[]>([]);
-  const [save, setSave] = useState<boolean>(true);
+  const [save, setSave] = useState<boolean>(false);
+  const [reset, setReset] = useState<boolean>(true);
   const [play, setPlay] = useState<boolean>(true);
   // const processList : IProcess[]= [
   //   { id: 1, arrivalTime: 0, executionTime: 10, deadline: 20, numPages: 4 },
@@ -34,14 +34,15 @@ const App: React.FC = () => {
 
   
  const processList = Object.values(processes);
-//  console.log(processList);
 
 
  useEffect(() => {
+
   if (processList.length > 0) {
     const schedulerType: string = conditions.method;
     const createdScheduler: Scheduler = SchedulerFactory.createScheduler(schedulerType as SchedulerType);
     const createdSchedule = createdScheduler.schedule(processList, conditions.quantum, conditions.sobrecarga);
+
     setSchedule(createdSchedule);
     console.log("CreatedSchedule", createdSchedule);
     setTimeout(() => {
@@ -49,20 +50,33 @@ const App: React.FC = () => {
    }, 500);
   }
 }, [save]);
-  function handleClick(){
-    console.log(schedule);
-    
+
+  function handleRun(){
+	setReset(!reset);
     setSave(!save);
+    console.log(schedule);
+	document.getElementById("button__run").disabled = true;
+	document.getElementById("button__reset").disabled = false;
   }
+  function handleReset(){
+    setReset(!reset);
+	document.getElementById("button__reset").disabled = true;
+	document.getElementById("button__run").disabled = false;
+  }
+
+
   return (
-    <div className="column">
-      <img src={logo} alt="Logo" className="logo" />
-      <InputsAndMethods conditions={conditions} setConditions={setConditions} />
-      <CreateProcesses processes={processes} setProcesses={setProcesses} />
-      <button onClick={handleClick}>Run</button>
-      <FrontGanttChart processList={processList} conditions={conditions} schedule={schedule}  play={play} />
-      <MemoriesComponent processList={processList} conditions={conditions} schedule={schedule} play={play} />
+    <div className="column main__window">
+	  <div className="main__header">
+        <InputsAndMethods conditions={conditions} setConditions={setConditions} />
+        <CreateProcesses processes={processes} setProcesses={setProcesses} />
+	  </div>
+      <button id="button__run" onClick={handleRun}>Run</button><br/>
+      <button id="button__reset" onClick={handleReset}>Reset</button>
+      <FrontGanttChart processList={processList} conditions={conditions} schedule={schedule}  play={play} reset={reset}/>
+      <MemoriesComponent processList={processList} conditions={conditions} schedule={schedule} play={save} reset={reset}/>
     </div>
+
   );
 };
 

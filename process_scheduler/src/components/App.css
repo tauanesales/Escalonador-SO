@@ -1,10 +1,49 @@
 .logo {
-  width: 181px;
-  margin-inline: auto;
-  margin-bottom: 1rem;
+  display: block;
+  max-width: 10%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
 }
 
 .column {
-  width: min(100% - 2rem, 1680px);
   margin-inline: auto;
+}
+
+#root {
+	height: 90%;
+}
+
+.main__window {
+  width: 80%;
+  height: 90%;
+  
+  margin: 5% 10% 5% 10%;
+  
+  outline-style: solid;
+  outline-color: #291e67;
+  border-radius: 1rem;
+  padding: 1%;
+  
+  overflow:auto;
+  scrollbar-color: #87cefa white;
+  scrollbar-width: thin;
+  
+  background-color: #fff;
+  box-shadow: 0px 0px 64px;
+}
+
+.main__window form {
+	display: flex;
+	flex-direction: row;
+}
+
+.main__header__wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.main__header {
+	display: flex;
+	flex-direction: column;
 }
