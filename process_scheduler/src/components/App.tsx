@@ -55,13 +55,13 @@ const App: React.FC = () => {
 	setReset(!reset);
     setSave(!save);
     console.log(schedule);
-	document.getElementById("button__run").disabled = true;
-	document.getElementById("button__reset").disabled = false;
+	(document.getElementById("button__run") as HTMLInputElement).disabled = true;
+	(document.getElementById("button__reset") as HTMLInputElement).disabled = false;
   }
   function handleReset(){
     setReset(!reset);
-	document.getElementById("button__reset").disabled = true;
-	document.getElementById("button__run").disabled = false;
+	(document.getElementById("button__reset") as HTMLInputElement).disabled = true;
+	(document.getElementById("button__run") as HTMLInputElement).disabled = false;
   }
 
 
