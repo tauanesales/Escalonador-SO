@@ -1,0 +1,27 @@
+.chart-box {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  /* border: 1px solid black; */
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 0.25rem;
+}
+
+.wait-box {
+  background-color: var(--wait-box);
+}
+
+.processing-box {
+  background-color: var(--processing-box);
+}
+
+.switch-box {
+  background-color: var(--switch-box);
+}
+
+.hidden-box {
+  /* background-color: transparent; */
+  /* background-color: var(--chart-background-color); */
+  background-color: var(--empty-color);
+}

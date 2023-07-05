@@ -1,0 +1,17 @@
+.chart {
+  margin-top: 1rem;
+  height: 300px;
+  background-color: var(--chart-background-color);
+}
+
+.chart__column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.chart__wrapper {
+  display: flex;
+  rotate: x 180deg;
+  gap: 0.25rem;
+}

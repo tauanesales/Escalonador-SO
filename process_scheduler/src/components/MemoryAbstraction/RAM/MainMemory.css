@@ -1,0 +1,46 @@
+.matrix-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.matrix-row {
+  display: flex;
+  background-color: white;
+}
+
+.matrix-cell {
+  padding: 8px;
+  border: 1px solid #000;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1{
+  color: white;
+  margin-bottom: 20px;
+}
+
+.matrix-cell {
+  position: relative;
+}
+
+.matrix-cell .cell-address {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px;
+  font-size: 12px;
+  color: blue;
+  font-style: bold;
+}
+
+.matrix-cell .cell-value {
+  margin-top: 10px;
+}

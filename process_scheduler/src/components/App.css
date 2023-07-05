@@ -1,0 +1,10 @@
+.logo {
+  width: 181px;
+  margin-inline: auto;
+  margin-bottom: 1rem;
+}
+
+.column {
+  width: min(100% - 2rem, 1680px);
+  margin-inline: auto;
+}

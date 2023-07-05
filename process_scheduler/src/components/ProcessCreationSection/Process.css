@@ -1,0 +1,64 @@
+.process__card {
+  background-color: #14114e;
+  padding: 1rem;
+  border-radius: 0.25rem;
+}
+
+.process__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.process__card__heading {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #fff;
+}
+
+.process__card form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.process__card label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.process__card label > p {
+  color: white;
+}
+
+.process__card input {
+  font-size: 1rem;
+  width: 100%;
+  padding: 1rem;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #0d0b34;
+}
+
+.process__card input:focus {
+  outline: 2px solid #87cefa;
+  outline-offset: 2px;
+}
+
+.process__card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.process__card__close {
+  font-size: 1.25rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.25rem;
+  background-color: #0d0b34;
+  color: white;
+}
