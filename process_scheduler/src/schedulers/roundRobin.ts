@@ -17,7 +17,7 @@ export default class RoundRobinScheduler implements Scheduler {
     let currentMomentOfExecution: number = 0;
     let processIterations: number = 0;
     let processIndex: number = -1;
-    let lastProcessEnded: boolean = false;
+    let lastProcessEnded: boolean = true;
 
     let queue: RotatingQueue = new RotatingQueue();
 
