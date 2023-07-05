@@ -21,7 +21,7 @@ const App: React.FC = () => {
  const [processes, setProcesses] = useState<{ [key: string]: IProcess }>({});
   const [conditions, setConditions] = useState<IConditions>(INITIAL_CONDITIONS);
   const [schedule, setSchedule] = useState<number[]>([]);
-  const [save, setSave] = useState<boolean>(true);
+  const [save, setSave] = useState<boolean>(false);
   const [reset, setReset] = useState<boolean>(true);
   const [play, setPlay] = useState<boolean>(true);
   // const processList : IProcess[]= [
@@ -52,11 +52,16 @@ const App: React.FC = () => {
 }, [save]);
 
   function handleRun(){
+	setReset(!reset);
     setSave(!save);
     console.log(schedule);
+	document.getElementById("button__run").disabled = true;
+	document.getElementById("button__reset").disabled = false;
   }
   function handleReset(){
     setReset(!reset);
+	document.getElementById("button__reset").disabled = true;
+	document.getElementById("button__run").disabled = false;
   }
 
 
@@ -66,10 +71,10 @@ const App: React.FC = () => {
         <InputsAndMethods conditions={conditions} setConditions={setConditions} />
         <CreateProcesses processes={processes} setProcesses={setProcesses} />
 	  </div>
-      <button onClick={handleRun}>Run</button><br/>
-      <button onClick={handleReset}>Reset</button>
+      <button id="button__run" onClick={handleRun}>Run</button><br/>
+      <button id="button__reset" onClick={handleReset}>Reset</button>
       <FrontGanttChart processList={processList} conditions={conditions} schedule={schedule}  play={play} reset={reset}/>
-      <MemoriesComponent processList={processList} conditions={conditions} schedule={schedule} play={play} reset={reset}/>
+      <MemoriesComponent processList={processList} conditions={conditions} schedule={schedule} play={save} reset={reset}/>
     </div>
 
   );
