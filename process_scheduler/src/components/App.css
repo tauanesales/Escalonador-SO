@@ -93,3 +93,17 @@
 	background-color: #bf4336;
 	color: #5b525b;
 }
+
+#credits {
+	height: 16px;
+	width: 16px;
+	background-color: #291e67;
+	color: white;
+    z-index: 9;
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 6.3%;
+	right: 0;
+	margin-right: 11.5%;
+	opacity: 40%;
+}

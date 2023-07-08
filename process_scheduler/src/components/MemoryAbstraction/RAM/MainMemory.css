@@ -41,6 +41,7 @@ h1{
   font-style: bold;
 }
 
-.matrix-cell-disk .cell-value-disk {
-  margin-top: 10px;
+.matrix-cell .cell-value {
+  margin-top: 16px;
 }
+

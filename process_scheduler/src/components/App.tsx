@@ -70,9 +70,14 @@ const App: React.FC = () => {
 	document.getElementById("chart__turnaround").style.color = "white";
 	document.getElementsByClassName("methods__form__wrapper")[0].scrollIntoView();
   }
+  
+  function credits() {
+	  window.open('https://github.com/tauanesales/Escalonador-SO', '_blank');
+  }
 
   return (
     <div className="column main__window">
+	<button id="credits" title="Projeto final MATA58 2023.1&#10;(Sistemas Operacionais)&#10;&#10;Desenvolvido por:&#10;Cláudio de Farias&#10;Danilo Santiago&#10;Enzo Magalhães&#10;Gustavo Jorge&#10;Tauane Sales&#10;&#10;Clique para abrir o repositório&#10;deste simulador em nova aba" onClick={credits}>?</button>
       <div className="main__header">
         <InputsAndMethods
           conditions={conditions}
