@@ -68,7 +68,7 @@ const App: React.FC = () => {
     (document.getElementById("button__run") as HTMLInputElement).disabled =
       false;
 	document.getElementById("chart__turnaround").style.color = "white";
-	document.getElementsByClassName("column")[0].scrollIntoView({behavior: 'smooth'});
+	document.getElementsByClassName("methods__form__wrapper")[0].scrollIntoView();
   }
 
   return (

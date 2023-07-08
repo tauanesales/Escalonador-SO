@@ -51,6 +51,7 @@ const MemoriesComponent: React.FC<MemoriesComponentProps> = ({
   }, [schedule]);
 
   return (
+  <div className="create__process__heading">
     <div className="memory-container">
       <div className="disk-container">
         <DiskMemory
@@ -69,6 +70,7 @@ const MemoriesComponent: React.FC<MemoriesComponentProps> = ({
         />
       </div>
     </div>
+  </div>
   );
 };
 
