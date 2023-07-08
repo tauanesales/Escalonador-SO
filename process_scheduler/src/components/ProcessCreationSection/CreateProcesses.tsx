@@ -102,6 +102,7 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({
           </li>
         ))}
       </ol>
+	  <div className="create__process__heading"></div>
     </section>
   );
 };

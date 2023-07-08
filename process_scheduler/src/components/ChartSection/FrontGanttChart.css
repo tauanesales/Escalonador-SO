@@ -1,6 +1,6 @@
 .chart {
   margin-top: 1rem;
-  height: 300px;
+  height: auto;
   background-color: var(--chart-background-color);
 }
 
@@ -15,4 +15,27 @@
   margin: auto;
   rotate: x 180deg;
   gap: 0.25rem;
+  
+  width: auto;
+  max-width: 100%;
+  
+  padding-bottom: .5rem;
+  
+  overflow-x: auto;
+  scrollbar-color: #87cefa white;
+  scrollbar-width: thin;
+}
+
+#chart__turnaround {
+	color: white;
+	transition: color .5s ease;
+	-moz-transition: color .5s ease;
+    -o-transition: color .5s ease;
+    -webkit-transition: color .5s ease;
+}
+
+.chart {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }

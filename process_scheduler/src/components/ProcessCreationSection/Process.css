@@ -12,6 +12,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   margin-top: 1rem;
+  margin-bottom: 1rem;
   gap: 1rem;
 }
 
@@ -65,4 +66,8 @@
   border-radius: 5rem;
   background-color: #ff7e7e;
   color: #ff7e7e;
+}
+
+.process__card__close:hover {
+  color: #ffffff;
 }

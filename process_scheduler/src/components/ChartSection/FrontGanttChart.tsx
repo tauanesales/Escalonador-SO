@@ -93,6 +93,14 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
 
     const renderAsync = async () => {
       for (let current_time = 0; current_time < matrix.length; current_time++) {
+		  if(current_time == 1) {
+			  document.getElementsByClassName("chart")[0].scrollIntoView({behavior: "smooth"});
+		  };
+		  if(current_time == matrix.length - 1) {
+			  document.getElementById("chart__turnaround").style.color = "black";
+			  (document.getElementById("button__reset") as HTMLInputElement).disabled =
+			  false;
+		  }
         const column = matrix[current_time].reduce(
           (accumulator: JSX.Element, proc, _process_index) => {
             switch (proc) {
@@ -187,8 +195,8 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
 
   return (
     <div className="box chart">
-      <button onClick={handleClick}>Logs</button>
-      <p>turnaround: {turnaround}</p>
+	  {/*<button onClick={handleClick}>Logs</button>*/}
+      <p id="chart__turnaround">Turnaround: {turnaround}</p>
       <br />
       <div className="chart__wrapper">{columns}</div>
     </div>

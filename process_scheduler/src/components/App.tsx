@@ -67,6 +67,8 @@ const App: React.FC = () => {
       true;
     (document.getElementById("button__run") as HTMLInputElement).disabled =
       false;
+	document.getElementById("chart__turnaround").style.color = "white";
+	document.getElementsByClassName("column")[0].scrollIntoView({behavior: 'smooth'});
   }
 
   return (
@@ -78,13 +80,14 @@ const App: React.FC = () => {
         />
         <CreateProcesses processes={processes} setProcesses={setProcesses} />
       </div>
-      <button id="button__run" onClick={handleRun}>
-        Run
-      </button>
-      <br />
-      <button id="button__reset" onClick={handleReset}>
-        Reset
-      </button>
+	  <div id="buttons">
+		<button id="button__run" onClick={handleRun}>
+			Run
+		</button>
+		<button id="button__reset" onClick={handleReset}>
+			Reset
+		</button>
+	  </div>
       <FrontGanttChart
         processList={processList}
         conditions={conditions}
