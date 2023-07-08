@@ -60,8 +60,6 @@ const App: React.FC = () => {
     // console.log(schedule);
     (document.getElementById("button__run") as HTMLInputElement).disabled =
       true;
-    (document.getElementById("button__reset") as HTMLInputElement).disabled =
-      false;
   }
   function handleReset() {
     setReset(!reset);
