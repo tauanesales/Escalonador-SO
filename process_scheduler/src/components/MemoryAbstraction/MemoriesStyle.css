@@ -1,16 +1,24 @@
 .memory-container {
     display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-  }
+	padding-bottom: 2rem;
+}
   
-  .disk-container {
+.memory-container h1 {
+	color: black;
+	font-style: italic;
+}
+  
+.disk-container {
     flex: 1;
     margin-right: 20px;
-  }
+}
   
-  .ram-container {
+.ram-container {
     flex: 1;
     margin-left: 20px;
-  }
+}
   
