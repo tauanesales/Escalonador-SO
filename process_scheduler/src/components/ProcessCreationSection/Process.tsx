@@ -72,7 +72,7 @@ const Process: React.FC<ProcessProps> = memo((props) => {
             id={`numPages-${process.id}`}
             name={"numPages" as keyof IProcess}
             value={process.numPages}
-            min="0"
+            min="1"
           />
         </label>
         <label htmlFor="arrivalTime">
