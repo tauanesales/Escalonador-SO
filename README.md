@@ -6,29 +6,36 @@
 - [Versions](#versions)
 - [Authors](#authors)
 - [Languages](#languages)
+- [Trabalho de Escalonamento](#trabalho-de-escalonamento)
+  - [Requisitos](#requisitos)
+  - [Como executar](#como-executar)
+    - [Instale o node&npm:](#instale-o-nodenpm)
+      - [Linux](#linux)
+      - [Windows](#windows)
+    - [Baixar repositório e rodar o projeto:](#baixar-repositório-e-rodar-o-projeto)
 
-## About 
+
+## About
 
 Atividade relacionada sobre a matéria de Sistemas Operacionais.
 
 ## Versions
 
-### v1.0.0
+### v1.x.x
 
-Static HTML/CSS website.
+Static React/TS website.
 
+## Authors
 
-## Authors 
+Tauane Sales,
+Gustavo Jorge,
+Enzo Magalhães,
+Danilo Santiago e
+Cláudio de Farias.
 
- Tauane Sales,
- Gustavo Jorge,
- Enzo Magalhães,
- Danilo Santiago e
- Cláudio de Farias.
- 
- ## Languages
- 
- TypeScript
+## Languages
+
+TypeScript
 
 # Trabalho de Escalonamento
 
@@ -93,16 +100,21 @@ Fontes:
 - https://github.com/nvm-sh/nvm#install--update-script
 - https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl
 
+#### Windows
+
+Instale o [chocolatey](https://chocolatey.org/install) e execute o comando:
+
+```bash
+choco install nodejs.install
+```
+
 ### Baixar repositório e rodar o projeto:
 
 Com git e node/npm instalados:
 
 ```bash
 git clone https://github.com/tauanesales/Escalonador-SO.git
-cd Escalonador-SO
-git fetch --all
-git checkout front
-cd process_scheduler
+cd Escalonador-SO/process_scheduler
 npm install
 npm run dev
 ```
