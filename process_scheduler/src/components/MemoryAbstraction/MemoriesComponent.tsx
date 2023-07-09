@@ -32,6 +32,7 @@ const MemoriesComponent: React.FC<MemoriesComponentProps> = ({
 
   useEffect(() => {
     if (conditions.pagination == "fifo") {
+      
       const fifoPaging: PagingAlgorithm = new FIFOPageReplacement(
         processList,
         ramSize,

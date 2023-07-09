@@ -41,6 +41,12 @@ const DiskMemory: React.FC<DiskProps> = ({
             const rowIndex = Math.floor(i / 12);
             const address = rowIndex * 12 + colIndex;
             newMatrix[rowIndex][colIndex] = { value, address };
+            if(!isNaN(value)){
+              
+            }else{
+              newMatrix[rowIndex][colIndex] = "-";
+            }
+            
           }
 
           for (let i = currentDisco.length; i < 120; i++) {

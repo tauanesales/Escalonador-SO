@@ -57,7 +57,6 @@ const App: React.FC = () => {
   function handleRun() {
     setReset(!reset);
     setSave(!save);
-    // console.log(schedule);
     (document.getElementById("button__run") as HTMLInputElement).disabled =
       true;
   }
@@ -74,7 +73,7 @@ const App: React.FC = () => {
   function credits() {
 	  window.open('https://github.com/tauanesales/Escalonador-SO', '_blank');
   }
-
+  
   return (
     <div className="column main__window">
 	<button id="credits" title="Projeto final MATA58 2023.1&#10;(Sistemas Operacionais)&#10;&#10;Desenvolvido por:&#10;Cláudio de Farias&#10;Danilo Santiago&#10;Enzo Magalhães&#10;Gustavo Jorge&#10;Tauane Sales&#10;&#10;Clique para abrir o repositório&#10;deste simulador em nova aba" onClick={credits}>?</button>
@@ -107,7 +106,9 @@ const App: React.FC = () => {
         play={save}
         reset={reset}
       />
+      
     </div>
+
   );
 };
 

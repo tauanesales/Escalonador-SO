@@ -41,6 +41,11 @@ const MainMemory: React.FC<MainMemoryProps> = ({
             const colIndex = i % 10;
             const address = rowIndex * 10 + colIndex;
             newMatrix[rowIndex][colIndex] = { value, address };
+            if(!isNaN(value)){
+              
+            }else{
+              newMatrix[rowIndex][colIndex] = "-";
+            }
           }
 
           for (let i = currentRam.length; i < 50; i++) {
