@@ -74,6 +74,11 @@ const App: React.FC = () => {
 	  window.open('https://github.com/tauanesales/Escalonador-SO', '_blank');
   }
   
+  {/*useEffect(() => {
+	  handleRun();
+	  handleReset();
+  }, []);*/}
+  
   return (
     <div className="column main__window">
 	<button id="credits" title="Projeto final MATA58 2023.1&#10;(Sistemas Operacionais)&#10;&#10;Desenvolvido por:&#10;Cláudio de Farias&#10;Danilo Santiago&#10;Enzo Magalhães&#10;Gustavo Jorge&#10;Tauane Sales&#10;&#10;Clique para abrir o repositório&#10;deste simulador em nova aba" onClick={credits}>?</button>
@@ -103,7 +108,7 @@ const App: React.FC = () => {
         processList={processList}
         conditions={conditions}
         schedule={schedule}
-        play={save}
+        play={play}
         reset={reset}
       />
       
