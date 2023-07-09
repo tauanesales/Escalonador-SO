@@ -91,7 +91,7 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
 			  document.getElementsByClassName("chart")[0].scrollIntoView({behavior: "smooth"});
 		  };
 		  if(current_time == matrix.length - 1) {
-			  document.getElementById("chart__turnaround").style.color = "black";
+			  (document.getElementById("chart__turnaround") as HTMLElement).style.color = "black";
 			  (document.getElementById("button__reset") as HTMLInputElement).disabled =
 			  false;
 		  }
@@ -192,11 +192,11 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
 	var fields = document.getElementsByClassName("process__card__fields");
 	for(var i = 0; i < fields.length; i++) {
 		if(i % 2 == 0) {
-			if(fields[i].querySelector("input[name='executionTime']").value < 1) {
+			if(Number((fields[i].querySelector("input[name='executionTime']") as HTMLInputElement).value) < 1) {
 				noExceptions = false;
 			}
 		} else {
-			if(fields[i].querySelector("input[name='numPages']").value < 1) {
+			if(Number((fields[i].querySelector("input[name='numPages']") as HTMLInputElement).value) < 1) {
 				noExceptions = false;
 			}
 		}
@@ -204,11 +204,11 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
     if(noExceptions) {
 		renderColumn();
 	} else {
-		document.getElementById("chart__warning").style.display = 'inline';
+		(document.getElementById("chart__warning") as HTMLElement).style.display = 'inline';
 		document.getElementsByClassName("chart")[0].scrollIntoView({behavior: "smooth"});
 		(document.getElementById("button__reset") as HTMLInputElement).disabled =
 			  false;
-		document.getElementsByClassName("memory-container")[0].style.visibility = 'hidden';
+		(document.getElementsByClassName("memory-container")[0] as HTMLElement).style.visibility = 'hidden';
 	}
   }, [play]);
 

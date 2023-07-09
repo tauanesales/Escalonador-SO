@@ -6,7 +6,12 @@ on:
     paths:
       - "process_scheduler/**"
       - ".github/workflows/autodeploy.yml"
-
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "process_scheduler/**"
+      - ".github/workflows/autodeploy.yml"
+      
 jobs:
   build:
     runs-on: ubuntu-latest
