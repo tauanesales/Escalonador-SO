@@ -66,10 +66,10 @@ const App: React.FC = () => {
       true;
     (document.getElementById("button__run") as HTMLInputElement).disabled =
       false;
-	document.getElementById("chart__turnaround").style.color = "white";
-	document.getElementById("page__top").scrollIntoView();
-	document.getElementById("chart__warning").style.display = 'none';
-	document.getElementsByClassName("memory-container")[0].style.visibility = 'visible';
+	(document.getElementById("chart__turnaround") as HTMLElement).style.color = "white";
+	(document.getElementById("page__top") as HTMLElement).scrollIntoView();
+	(document.getElementById("chart__warning") as HTMLElement).style.display = 'none';
+	(document.getElementsByClassName("memory-container")[0] as HTMLElement).style.visibility = 'visible';
   }
 
   function credits() {
@@ -79,7 +79,7 @@ const App: React.FC = () => {
   useEffect(() => {
 	  (document.getElementById("button__reset") as HTMLInputElement).disabled =
       true;
-	  document.getElementById("chart__warning").style.display = 'none';
+	  (document.getElementById("chart__warning") as HTMLElement).style.display = 'none';
   }, []);
   
   return (
