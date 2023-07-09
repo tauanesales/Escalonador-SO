@@ -10,6 +10,18 @@
   gap: 1rem;
 }
 
+@media (max-width: 640px) {
+  .methods {
+    flex-direction: column;
+    justify-content: center;
+    gap: .5rem;
+  }
+  .methods__pagination {
+    margin-top: 10px;
+  }
+}
+
+
 .methods__bottom {
   width: 40%;
 }
@@ -48,7 +60,7 @@
   padding-right: 2.5%;
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 960px) {
 	.methods__form__wrapper {
 	  flex-direction: column;
 	}
