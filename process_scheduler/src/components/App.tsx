@@ -66,17 +66,24 @@ const App: React.FC = () => {
       true;
     (document.getElementById("button__run") as HTMLInputElement).disabled =
       false;
-	document.getElementById("chart__turnaround").style.color = "white";
-	document.getElementsByClassName("methods__form__wrapper")[0].scrollIntoView();
+    (
+      document.getElementById("chart__turnaround") as HTMLInputElement
+    ).style.color = "white";
   }
-  
+
   function credits() {
-	  window.open('https://github.com/tauanesales/Escalonador-SO', '_blank');
+    window.open("https://github.com/tauanesales/Escalonador-SO", "_blank");
   }
-  
+
   return (
     <div className="column main__window">
-	<button id="credits" title="Projeto final MATA58 2023.1&#10;(Sistemas Operacionais)&#10;&#10;Desenvolvido por:&#10;Cláudio de Farias&#10;Danilo Santiago&#10;Enzo Magalhães&#10;Gustavo Jorge&#10;Tauane Sales&#10;&#10;Clique para abrir o repositório&#10;deste simulador em nova aba" onClick={credits}>?</button>
+      <button
+        id="credits"
+        title="Projeto final MATA58 2023.1&#10;(Sistemas Operacionais)&#10;&#10;Desenvolvido por:&#10;Cláudio de Farias&#10;Danilo Santiago&#10;Enzo Magalhães&#10;Gustavo Jorge&#10;Tauane Sales&#10;&#10;Clique para abrir o repositório&#10;deste simulador em nova aba"
+        onClick={credits}
+      >
+        ?
+      </button>
       <div className="main__header">
         <InputsAndMethods
           conditions={conditions}
@@ -84,14 +91,14 @@ const App: React.FC = () => {
         />
         <CreateProcesses processes={processes} setProcesses={setProcesses} />
       </div>
-	  <div id="buttons">
-		<button id="button__run" onClick={handleRun}>
-			Run
-		</button>
-		<button id="button__reset" onClick={handleReset}>
-			Reset
-		</button>
-	  </div>
+      <div id="buttons">
+        <button id="button__run" onClick={handleRun}>
+          Run
+        </button>
+        <button id="button__reset" onClick={handleReset}>
+          Reset
+        </button>
+      </div>
       <FrontGanttChart
         processList={processList}
         conditions={conditions}
@@ -103,12 +110,10 @@ const App: React.FC = () => {
         processList={processList}
         conditions={conditions}
         schedule={schedule}
-        play={save}
+        play={play}
         reset={reset}
       />
-      
     </div>
-
   );
 };
 

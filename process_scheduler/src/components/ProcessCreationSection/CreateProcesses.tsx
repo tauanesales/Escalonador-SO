@@ -29,7 +29,7 @@ const INITIAL_PROCESS: IProcess | any = {
   arrivalTime: 0,
   deadline: 0,
   executionTime: 1,
-  numPages: 0,
+  numPages: 1,
 };
 
 const CreateProcesses: React.FC<CreateProcessesProps> = ({
@@ -73,13 +73,13 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({
     // console.log(Object.keys(newProcesses));
     setProcesses(newProcesses);
   };
-  
+
   useEffect(() => {
-	  if(Object.keys({ ...processes}).length == 0) {
-	  createProcess(INITIAL_PROCESS);
-  };
+    if (Object.keys({ ...processes }).length == 0) {
+      createProcess(INITIAL_PROCESS);
+    }
   });
-  
+
   return (
     <section className="create__process">
       <div className="create__process__heading"></div>
@@ -102,7 +102,7 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({
           </li>
         ))}
       </ol>
-	  <div className="create__process__heading"></div>
+      <div className="create__process__heading"></div>
     </section>
   );
 };
