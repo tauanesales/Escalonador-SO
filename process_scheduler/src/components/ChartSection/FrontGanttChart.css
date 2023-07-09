@@ -10,6 +10,19 @@
   gap: 0.25rem;
 }
 
+.chart__column__count {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 0.375rem;
+  
+  rotate: x 180deg;
+  padding-right: 0.15rem;
+  
+  white-space: pre-wrap;
+}
+
 .chart__wrapper {
   display: flex;
   margin: auto;

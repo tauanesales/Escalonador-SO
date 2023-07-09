@@ -137,6 +137,14 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
           },
           <></>
         );
+		
+		if(current_time == 0) {
+			newColumns.push(
+			<div key="count" className="chart__column__count">
+			{[...Array(matrix.length).keys()].map(x => ++x).toString().split(',').map((num) => <p key={"count_"+num}>{num}</p> )}
+			</div>
+        );
+		  };
 
         newColumns.push(
           <div key={current_time} className="chart__column">
