@@ -71,9 +71,9 @@ const App: React.FC = () => {
 	document.getElementById("chart__warning").style.display = 'none';
 	document.getElementsByClassName("memory-container")[0].style.visibility = 'visible';
   }
-  
+
   function credits() {
-	  window.open('https://github.com/tauanesales/Escalonador-SO', '_blank');
+    window.open("https://github.com/tauanesales/Escalonador-SO", "_blank");
   }
   
   useEffect(() => {
@@ -93,14 +93,14 @@ const App: React.FC = () => {
         />
         <CreateProcesses processes={processes} setProcesses={setProcesses} />
       </div>
-	  <div id="buttons">
-		<button id="button__run" onClick={handleRun}>
-			Run
-		</button>
-		<button id="button__reset" onClick={handleReset}>
-			Reset
-		</button>
-	  </div>
+      <div id="buttons">
+        <button id="button__run" onClick={handleRun}>
+          Run
+        </button>
+        <button id="button__reset" onClick={handleReset}>
+          Reset
+        </button>
+      </div>
       <FrontGanttChart
         processList={processList}
         conditions={conditions}
@@ -115,9 +115,7 @@ const App: React.FC = () => {
         play={play}
         reset={reset}
       />
-      
     </div>
-
   );
 };
 

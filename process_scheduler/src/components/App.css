@@ -56,54 +56,54 @@
 }
 
 #buttons button {
-	width: 40%;
-	height: 100px;
-	
-	font-size: 24px;
-	
-	outline-style: solid;
-	outline-color: #000000;
-	outline-width: 1px;
-	
-	border-radius: 1rem;
+  width: 25%;
+  height: 50px;
+
+  font-size: 24px;
+
+  outline-style: solid;
+  outline-color: #000000;
+  outline-width: 1px;
+
+  border-radius: 1rem;
 }
 
 #button__run {
-	background-color: #4CFF50;
+  background-color: #4cff50;
 }
 
 #button__run:hover {
-	background-color: #4CDF50;
+  background-color: #4cdf50;
 }
 
 #button__run:disabled {
-	background-color: #4CAF50;
-	color: #5b525b;
+  background-color: #4caf50;
+  color: #5b525b;
 }
 
 #button__reset {
-	background-color: #ff4336;
+  background-color: #ff4336;
 }
 
 #button__reset:hover {
-	background-color: #df4336;
+  background-color: #df4336;
 }
 
 #button__reset:disabled {
-	background-color: #bf4336;
-	color: #5b525b;
+  background-color: #bf4336;
+  color: #5b525b;
 }
 
 #credits {
-	height: 16px;
-	width: 16px;
-	background-color: #291e67;
-	color: white;
-    z-index: 9;
-	position: absolute;
-	bottom: 0;
-	margin-bottom: 6.3%;
-	right: 0;
-	margin-right: 11.5%;
-	opacity: 40%;
+  height: 16px;
+  width: 16px;
+  background-color: #291e67;
+  color: white;
+  z-index: 9;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 6.3%;
+  right: 0;
+  margin-right: 11.5%;
+  opacity: 40%;
 }

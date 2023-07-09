@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./CreateProcesses.css";
 // import { generateId } from "../../helper/generateId";
 import { IProcess } from "../../interfaces/Process";
@@ -73,13 +73,13 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({
     // console.log(Object.keys(newProcesses));
     setProcesses(newProcesses);
   };
-  
+
   useEffect(() => {
-	  if(Object.keys({ ...processes}).length == 0) {
-	  createProcess(INITIAL_PROCESS);
-  };
+    if (Object.keys({ ...processes }).length == 0) {
+      createProcess(INITIAL_PROCESS);
+    }
   });
-  
+
   return (
     <section className="create__process">
       <div className="create__process__heading"></div>
@@ -102,7 +102,7 @@ const CreateProcesses: React.FC<CreateProcessesProps> = ({
           </li>
         ))}
       </ol>
-	  <div className="create__process__heading"></div>
+      <div className="create__process__heading"></div>
     </section>
   );
 };

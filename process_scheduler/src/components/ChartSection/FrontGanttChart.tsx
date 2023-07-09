@@ -22,13 +22,7 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
 }) => {
   const [matrix, setMatrix] = useState<number[][]>([]);
   const [columns, setColumns] = useState<JSX.Element[]>([]);
-  const [turnaround, setTurnaround] = useState<number>();
-
-  const handleClick = () => {
-    console.log(conditions);
-    console.log(schedule);
-    console.log(processList);
-  };
+  const [turnaround, setTurnaround] = useState<number>(0);
 
   function create_matrix() {
     const newmatrix: number[][] = [];
