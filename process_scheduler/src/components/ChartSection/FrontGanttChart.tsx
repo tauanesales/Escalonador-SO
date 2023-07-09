@@ -93,7 +93,7 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
 
     const renderAsync = async () => {
       for (let current_time = 0; current_time < matrix.length; current_time++) {
-		  if(current_time == 1) {
+		  if(current_time == 0) {
 			  document.getElementsByClassName("chart")[0].scrollIntoView({behavior: "smooth"});
 		  };
 		  if(current_time == matrix.length - 1) {
@@ -186,7 +186,28 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
   }, [schedule]);
 
   useEffect(() => {
-    renderColumn();
+	let noExceptions = true;
+	var fields = document.getElementsByClassName("process__card__fields");
+	for(var i = 0; i < fields.length; i++) {
+		if(i % 2 == 0) {
+			if(fields[i].querySelector("input[name='executionTime']").value < 1) {
+				noExceptions = false;
+			}
+		} else {
+			if(fields[i].querySelector("input[name='numPages']").value < 1) {
+				noExceptions = false;
+			}
+		}
+	}
+    if(noExceptions) {
+		renderColumn();
+	} else {
+		document.getElementById("chart__warning").style.display = 'inline';
+		document.getElementsByClassName("chart")[0].scrollIntoView({behavior: "smooth"});
+		(document.getElementById("button__reset") as HTMLInputElement).disabled =
+			  false;
+		document.getElementsByClassName("memory-container")[0].style.visibility = 'hidden';
+	}
   }, [play]);
 
   useEffect(() => {
@@ -195,7 +216,9 @@ const FrontGanttChart: React.FC<FrontGanttChartProps> = ({
 
   return (
     <div className="box chart">
-	  {/*<button onClick={handleClick}>Logs</button>*/}
+	  <div id="chart__warning">
+	    <h2>O tempo de execução e a quantidade de páginas de todos os processos devem possuir valor maior que zero!</h2>
+	  </div>
       <p id="chart__turnaround">Turnaround: {turnaround}</p>
       <br />
       <div className="chart__wrapper">{columns}</div>

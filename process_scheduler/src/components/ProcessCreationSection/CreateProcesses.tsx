@@ -29,7 +29,7 @@ const INITIAL_PROCESS: IProcess | any = {
   arrivalTime: 0,
   deadline: 0,
   executionTime: 1,
-  numPages: 0,
+  numPages: 1,
 };
 
 const CreateProcesses: React.FC<CreateProcessesProps> = ({

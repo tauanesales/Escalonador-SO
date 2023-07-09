@@ -67,7 +67,9 @@ const App: React.FC = () => {
     (document.getElementById("button__run") as HTMLInputElement).disabled =
       false;
 	document.getElementById("chart__turnaround").style.color = "white";
-	document.getElementsByClassName("methods__form__wrapper")[0].scrollIntoView();
+	document.getElementById("page__top").scrollIntoView();
+	document.getElementById("chart__warning").style.display = 'none';
+	document.getElementsByClassName("memory-container")[0].style.visibility = 'visible';
   }
   
   function credits() {
@@ -77,11 +79,12 @@ const App: React.FC = () => {
   useEffect(() => {
 	  (document.getElementById("button__reset") as HTMLInputElement).disabled =
       true;
+	  document.getElementById("chart__warning").style.display = 'none';
   }, []);
   
   return (
     <div className="column main__window">
-	<div className="page__top"></div>
+	<div id="page__top"></div>
 	<button id="credits" title="Projeto final MATA58 2023.1&#10;(Sistemas Operacionais)&#10;&#10;Desenvolvido por:&#10;Cláudio de Farias&#10;Danilo Santiago&#10;Enzo Magalhães&#10;Gustavo Jorge&#10;Tauane Sales&#10;&#10;Clique para abrir o repositório&#10;deste simulador em nova aba" onClick={credits}>?</button>
       <div className="main__header">
         <InputsAndMethods

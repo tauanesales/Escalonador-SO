@@ -39,3 +39,15 @@
 	flex-direction: column;
 	align-items: center;
 }
+
+#chart__warning {
+	background-color: pink;
+	outline: solid;
+	outline-width: 1px;
+	outline-color: red;
+	color: red;
+	font-size: 16px;
+	width: 60%;
+	padding: 1.5rem;
+	border-radius: 1rem;
+}
